@@ -1,4 +1,4 @@
-type IconName = 'list' | 'clock' | 'dumbbell' | 'gear' | 'back';
+type IconName = 'list' | 'clock' | 'dumbbell' | 'gear' | 'back' | 'chevron' | 'up' | 'down' | 'close' | 'check';
 
 const PATHS: Record<IconName, string> = {
   // Lignes de carnet
@@ -8,6 +8,11 @@ const PATHS: Record<IconName, string> = {
   gear:
     'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM19.4 13.5l1.6 1.2-2 3.5-1.9-.7a7 7 0 0 1-1.7 1l-.3 2h-4.2l-.3-2a7 7 0 0 1-1.7-1l-1.9.7-2-3.5 1.6-1.2a7 7 0 0 1 0-3L3 9.3l2-3.5 1.9.7a7 7 0 0 1 1.7-1l.3-2h4.2l.3 2a7 7 0 0 1 1.7 1l1.9-.7 2 3.5-1.6 1.2a7 7 0 0 1 0 3Z',
   back: 'M15 5l-7 7 7 7',
+  chevron: 'M9 5l7 7-7 7',
+  up: 'M12 19V5M6 11l6-6 6 6',
+  down: 'M12 5v14M6 13l6 6 6-6',
+  close: 'M6 6l12 12M18 6 6 18',
+  check: 'M5 12.5l4.5 4.5L19 7.5',
 };
 
 export function Icon({ name, size = 24 }: { name: IconName; size?: number }) {

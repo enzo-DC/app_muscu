@@ -1,0 +1,151 @@
+.form {
+  display: grid;
+  gap: var(--s5);
+}
+
+.autosaved {
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+}
+
+.sectionTitle {
+  padding-bottom: var(--s1);
+  border-bottom: 1px solid var(--ink);
+  font-size: var(--fs-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.help {
+  margin-top: var(--s2);
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 2ch 1fr auto;
+  column-gap: var(--s3);
+  row-gap: var(--s2);
+  align-items: center;
+  padding: var(--s3) 0;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.index {
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.name {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  min-width: 0;
+}
+
+.archived {
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.controls {
+  grid-column: 2 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.order {
+  display: flex;
+  gap: var(--s2);
+}
+
+.iconButton {
+  width: var(--tap);
+  height: var(--tap);
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--ink);
+}
+
+.iconButton:active:not(:disabled) {
+  background: var(--rule);
+}
+
+.iconButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.removeButton {
+  border-color: transparent;
+  color: var(--ink-soft);
+}
+
+.empty {
+  padding: var(--s4) 0;
+}
+
+.dangerZone {
+  margin-top: var(--s5);
+  padding-top: var(--s5);
+  border-top: 1px solid var(--rule);
+}
+
+.deleteButton {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+/* Sélecteur d'exercices */
+.pickerHint {
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+}
+
+.check {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink-soft);
+  border-radius: 6px;
+  color: var(--accent-ink);
+}
+
+.picked .check {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.picked .addedLabel {
+  color: var(--ink);
+}
+
+.addedLabel {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.doneBar {
+  position: sticky;
+  bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
+  margin-top: var(--s5);
+  padding: var(--s3) 0;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+}

@@ -1,0 +1,75 @@
+.section + .section {
+  margin-top: var(--s5);
+}
+
+.groupTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: var(--s1);
+  border-bottom: 1px solid var(--ink);
+  font-size: var(--fs-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.count {
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  font-size: var(--fs-md);
+  color: var(--ink-soft);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Ligne cliquable partagée (lien ou bouton) */
+.row {
+  width: 100%;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: var(--s2) 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  text-decoration: none;
+}
+
+.row:active {
+  background: var(--rule);
+}
+
+.text {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  display: block;
+  font-size: var(--fs-md);
+}
+
+.note {
+  display: block;
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trailing {
+  flex: none;
+  color: var(--ink-soft);
+}

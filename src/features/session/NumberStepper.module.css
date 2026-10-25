@@ -1,0 +1,73 @@
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.button {
+  flex: none;
+  width: var(--tap);
+  height: var(--tap);
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--ink-soft);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  font-family: var(--font-num);
+  font-size: var(--fs-xl);
+  font-weight: 500;
+  line-height: 1;
+  touch-action: manipulation; /* pas de zoom au double tap */
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.94);
+  background: var(--rule);
+}
+
+.button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.field {
+  width: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wide {
+  width: 72px;
+}
+
+.input {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  text-align: center;
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-num);
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+.input:focus-visible {
+  outline: 0;
+  border-bottom-color: var(--ink);
+}
+
+.input::placeholder {
+  color: var(--ink-soft);
+}
+
+.unit {
+  font-size: var(--fs-xs);
+  color: var(--ink-soft);
+  line-height: 1;
+}

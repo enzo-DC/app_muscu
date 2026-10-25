@@ -1,0 +1,50 @@
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.button {
+  width: var(--tap);
+  height: var(--tap);
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--ink-soft);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  font-family: var(--font-num);
+  font-size: var(--fs-xl);
+  font-weight: 500;
+  line-height: 1;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.94);
+  background: var(--rule);
+}
+
+.button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.value {
+  min-width: 4.5ch;
+  text-align: center;
+  line-height: 1;
+}
+
+.number {
+  display: block;
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-xl);
+  font-weight: 600;
+}
+
+.unit {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--ink-soft);
+}

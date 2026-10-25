@@ -10,10 +10,12 @@ type Props = {
   backTo?: string;
   /** Action à droite de l'en-tête (ex. bouton réglages). */
   action?: ReactNode;
+  /** « grid » : léger quadrillage de carnet en fond (écran de séance uniquement). */
+  background?: 'grid';
   children: ReactNode;
 };
 
-export function Screen({ title, backTo, action, children }: Props) {
+export function Screen({ title, backTo, action, background, children }: Props) {
   return (
     <>
       <header className={styles.header}>
@@ -27,7 +29,9 @@ export function Screen({ title, backTo, action, children }: Props) {
           {action}
         </div>
       </header>
-      <main className={styles.content}>{children}</main>
+      <div className={background === 'grid' ? styles.grid : undefined}>
+        <main className={styles.content}>{children}</main>
+      </div>
     </>
   );
 }

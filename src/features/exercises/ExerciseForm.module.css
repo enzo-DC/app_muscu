@@ -1,0 +1,20 @@
+.form {
+  display: grid;
+  gap: var(--s5);
+}
+
+.autosaved {
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+}
+
+.dangerZone {
+  margin-top: var(--s5);
+  padding-top: var(--s5);
+  border-top: 1px solid var(--rule);
+}
+
+.deleteButton {
+  border-color: var(--danger);
+  color: var(--danger);
+}

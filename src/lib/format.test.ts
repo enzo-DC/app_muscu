@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatKg, formatNumber, formatTimer } from './format';
+import { formatKg, formatMinutes, formatNumber, formatTimer, parseDecimal } from './format';
 
 describe('format', () => {
   it('formate les nombres en fr-FR avec virgule décimale', () => {
@@ -11,6 +11,20 @@ describe('format', () => {
   it('formate une charge', () => {
     expect(formatKg(37.5)).toBe('37,5\u00a0kg');
     expect(formatKg(undefined)).toBe('—');
+  });
+
+  it('lit un nombre saisi au clavier, virgule ou point', () => {
+    expect(parseDecimal('37,5')).toBe(37.5);
+    expect(parseDecimal(' 40.25 ')).toBe(40.25);
+    expect(parseDecimal('')).toBeUndefined();
+    expect(parseDecimal('abc')).toBeNull();
+    expect(parseDecimal('-5')).toBeNull();
+  });
+
+  it('formate une durée en minutes', () => {
+    expect(formatMinutes(2700)).toBe('45\u00a0min');
+    expect(formatMinutes(3900)).toBe('1\u00a0h\u00a005');
+    expect(formatMinutes(20)).toBe('0\u00a0min');
   });
 
   it('formate un minuteur m:ss', () => {

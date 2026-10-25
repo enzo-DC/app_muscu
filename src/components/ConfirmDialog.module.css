@@ -1,0 +1,32 @@
+.dialog {
+  width: min(100% - 2 * var(--s4), 400px);
+  padding: var(--s5);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  color: var(--ink);
+}
+
+.dialog::backdrop {
+  background: rgb(28 27 25 / 0.45);
+}
+
+.title {
+  font-size: var(--fs-lg);
+  margin-bottom: var(--s3);
+}
+
+.message {
+  margin-bottom: var(--s5);
+}
+
+.actions {
+  display: grid;
+  gap: var(--s2);
+}
+
+.danger {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: var(--accent-ink);
+}

@@ -1,0 +1,40 @@
+.field {
+  display: grid;
+  gap: var(--s2);
+}
+
+.label {
+  font-weight: 700;
+}
+
+.hint {
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  min-height: var(--tap);
+  padding: var(--s3);
+  border: 1px solid var(--ink-soft);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  font-size: var(--fs-md);
+}
+
+.textarea {
+  min-height: 96px;
+  resize: vertical;
+  line-height: 1.4;
+}
+
+.input:focus-visible,
+.textarea:focus-visible {
+  outline-offset: 0;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--ink-soft);
+}

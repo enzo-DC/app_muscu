@@ -1,0 +1,337 @@
+/* En-tête */
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.clock {
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.finishButton {
+  padding: 0 var(--s4);
+}
+
+.none {
+  margin-bottom: var(--s5);
+}
+
+/* Cartes d'exercice */
+.cards {
+  display: grid;
+  gap: var(--s3);
+}
+
+.card {
+  scroll-margin-top: 72px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+}
+
+.cardOpen {
+  border-color: var(--ink);
+}
+
+.cardTitle {
+  font-family: var(--font-text);
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: normal;
+}
+
+.cardHeader {
+  width: 100%;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: var(--s2) var(--s3) var(--s2) var(--s4);
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.cardName {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-num);
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.cardComplete .cardName {
+  color: var(--ink-soft);
+}
+
+.progress {
+  flex: none;
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-md);
+  color: var(--ink-soft);
+}
+
+.cardComplete .progress {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.chevron {
+  flex: none;
+  display: grid;
+  color: var(--ink-soft);
+  transform: rotate(90deg);
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.chevronOpen {
+  transform: rotate(-90deg);
+}
+
+.cardBody {
+  overflow: hidden;
+}
+
+.exerciseNote {
+  margin: 0 var(--s4) var(--s2);
+  padding: var(--s2) var(--s3);
+  border-left: 3px solid var(--rule);
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+}
+
+/* Séries */
+.sets {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Ligne compacte : SÉRIE 1   37,5 kg × 10   [✓] */
+.set {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: var(--s1) var(--s3) var(--s1) 0;
+  border-top: 1px solid var(--rule);
+  transition: background-color var(--dur) var(--ease-out);
+}
+
+.setSummary {
+  flex: 1;
+  min-width: 0;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: 0 0 0 var(--s4);
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.setSummaryValue {
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.setLabel {
+  flex: none;
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Série en cours : les − / + sur deux lignes, la grande case ✓ à droite */
+.setExpanded {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'label label'
+    'values check';
+  row-gap: var(--s2);
+  column-gap: var(--s3);
+  padding: var(--s3) var(--s3) var(--s3) var(--s4);
+}
+
+.setExpanded .setLabel {
+  grid-area: label;
+}
+
+.setValues {
+  grid-area: values;
+  display: grid;
+  gap: var(--s2);
+  justify-content: start;
+}
+
+.check {
+  flex: none;
+  width: var(--tap);
+  height: var(--tap);
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  color: var(--ink-soft);
+  touch-action: manipulation;
+  transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+}
+
+.checkLarge {
+  grid-area: check;
+  width: 72px;
+  height: auto;
+  align-self: stretch;
+}
+
+.check svg {
+  opacity: 0.35;
+}
+
+.check:active {
+  transform: scale(0.94);
+}
+
+/* Série faite : la case se remplit, la ligne s'atténue */
+.setDone {
+  background: var(--paper);
+}
+
+.setDone .setValues,
+.setDone .setLabel {
+  opacity: 0.6;
+}
+
+.setDone .check {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.setDone .check svg {
+  opacity: 1;
+}
+
+.textButton {
+  width: 100%;
+  min-height: var(--tap);
+  border: 0;
+  border-top: 1px solid var(--rule);
+  background: transparent;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.textButton:active {
+  background: var(--rule);
+}
+
+/* Bas de page */
+.footer {
+  display: grid;
+  gap: var(--s4);
+  margin-top: var(--s5);
+}
+
+.deleteLink {
+  justify-self: center;
+  min-height: var(--tap);
+  padding: 0 var(--s4);
+  border: 0;
+  background: transparent;
+  color: var(--danger);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.undoneWarning {
+  margin-bottom: var(--s5);
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+}
+
+/* Récapitulatif */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 0 var(--s5);
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.stat {
+  padding: var(--s3) var(--s2);
+}
+
+.stat + .stat {
+  border-left: 1px solid var(--rule);
+}
+
+.stat dt {
+  font-size: var(--fs-xs);
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.stat dd {
+  margin: 0;
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.statUnit {
+  font-size: var(--fs-md);
+  font-weight: 500;
+}
+
+.done {
+  display: grid;
+  gap: var(--s4);
+  padding-top: var(--s4);
+}
+
+.doneText {
+  font-family: var(--font-num);
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.doneName {
+  color: var(--ink-soft);
+}
+
+.volumeHelp {
+  margin-top: calc(-1 * var(--s3));
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+}
+
+/* Ajout d'exercice */
+.pickerTools {
+  display: grid;
+  gap: var(--s5);
+}
+
+.pickerHint {
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+}

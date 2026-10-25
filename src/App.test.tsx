@@ -13,10 +13,10 @@ function renderAt(path: string) {
 }
 
 describe('navigation', () => {
-  it('affiche l’accueil et l’état vide au premier lancement', () => {
+  it('affiche l’accueil et l’état vide au premier lancement', async () => {
     renderAt('/');
     expect(screen.getByRole('heading', { level: 1, name: 'Séances' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Créer ma première séance' })).toBeInTheDocument();
+    expect(await screen.findByRole('link', { name: 'Créer ma première séance' })).toBeInTheDocument();
   });
 
   it('change d’écran via la barre d’onglets', async () => {

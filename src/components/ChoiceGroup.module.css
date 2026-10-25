@@ -1,0 +1,54 @@
+.group {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.legend {
+  padding: 0;
+  margin-bottom: var(--s2);
+  font-weight: 700;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+}
+
+.option {
+  position: relative;
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+}
+
+.chip {
+  min-height: var(--tap);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--s3);
+  border: 1px solid var(--ink-soft);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+}
+
+/* Choix sélectionné : encre pleine, comme une case noircie au stylo */
+.input:checked + .chip {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper-raised);
+  font-weight: 700;
+}
+
+.input:focus-visible + .chip {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
+}

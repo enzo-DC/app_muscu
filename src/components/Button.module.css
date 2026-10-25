@@ -13,8 +13,13 @@
   transition: transform var(--dur) var(--ease-out), background-color var(--dur) var(--ease-out);
 }
 
-.button:active {
+.button:active:not(:disabled) {
   transform: scale(0.98);
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .primary {

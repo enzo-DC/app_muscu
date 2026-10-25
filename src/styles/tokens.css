@@ -5,7 +5,7 @@
   --ink:          #1C1B19;  /* texte principal */
   --ink-soft:     #6B675F;  /* texte secondaire, « dernière fois » — 5:1 sur --paper */
   --rule:         #DDD6CA;  /* filets, bordures */
-  --accent:       #E4572E;  /* orange brique : action principale, série validée */
+  --accent:       #C94A22;  /* orange brique : action principale, série validée — 4,7:1 avec --accent-ink */
   --accent-ink:   #FFFFFF;
   --ok:           #2F7D4F;  /* record / succès (V2) */
   --danger:       #B3261E;

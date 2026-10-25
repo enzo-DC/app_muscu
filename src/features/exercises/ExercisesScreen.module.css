@@ -1,0 +1,10 @@
+.tools {
+  display: grid;
+  gap: var(--s3);
+  margin-bottom: var(--s5);
+}
+
+.empty {
+  display: grid;
+  gap: var(--s4);
+}

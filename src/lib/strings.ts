@@ -1,4 +1,4 @@
-import type { MuscleGroup } from '../db/schema';
+import type { ExerciseKind, MuscleGroup } from '../db/schema';
 
 /** Tous les textes de l'interface. Français, tutoiement, phrases courtes. */
 export const t = {
@@ -11,12 +11,61 @@ export const t = {
   },
 
   back: 'Retour',
+  cancel: 'Annuler',
+  autosaved: 'Tes modifications sont enregistrées automatiquement.',
 
   home: {
     title: 'Séances',
     settings: 'Réglages',
     emptyText: 'Pas encore de séance. Crée ta première pour commencer.',
     emptyCta: 'Créer ma première séance',
+  },
+
+  session: {
+    start: 'Démarrer',
+    startLabel: (name: string) => `Démarrer ${name}`,
+    free: 'Séance libre',
+    inProgress: 'Séance en cours',
+    resume: 'Reprendre la séance',
+    since: (duration: string) => `commencée il y a ${duration}`,
+    elapsed: 'Temps écoulé',
+    finish: 'Terminer',
+    none: 'Pas de séance en cours.',
+    backHome: 'Retour à l’accueil',
+    setsProgress: (done: number, total: number) => `${done}/${total} séries`,
+    setLabel: (n: number) => `Série ${n}`,
+    validate: (n: number) => `Valider la série ${n}`,
+    unvalidate: (n: number) => `Annuler la série ${n}`,
+    editSet: (n: number) => `Modifier la série ${n}`,
+    justStarted: 'commencée à l’instant',
+    weight: 'kg',
+    reps: 'reps',
+    minutes: 'min',
+    weightLabel: (n: number) => `Charge de la série ${n}, en kilos`,
+    repsLabel: (n: number) => `Répétitions de la série ${n}`,
+    minutesLabel: (n: number) => `Durée de la série ${n}, en minutes`,
+    less: (what: string) => `Moins — ${what}`,
+    more: (what: string) => `Plus — ${what}`,
+    addSet: '+ Ajouter une série',
+    addExercise: '+ Ajouter un exercice',
+    addExerciseTitle: 'Ajouter un exercice',
+    addExerciseHint: 'Touche l’exercice à ajouter à ta séance.',
+    emptyFree: 'Séance libre : ajoute les exercices au fur et à mesure.',
+    finishTitle: 'Terminer la séance ?',
+    finishMessage: 'Voici ce que tu as fait.',
+    finishUndone: 'Les séries non cochées ne seront pas gardées.',
+    finishConfirm: 'Terminer la séance',
+    keepGoing: 'Continuer',
+    delete: 'Supprimer cette séance',
+    deleteTitle: 'Supprimer la séance ?',
+    deleteMessage: 'Tout ce que tu as noté pendant cette séance sera effacé.',
+    deleteConfirm: 'Supprimer',
+    doneTitle: 'Séance terminée',
+    doneText: 'Bien joué, séance terminée.',
+    duration: 'Durée',
+    doneSets: 'Séries',
+    volume: 'Volume',
+    volumeHelp: 'Le volume, c’est la somme des charges × répétitions.',
   },
 
   history: {
@@ -26,7 +75,33 @@ export const t = {
 
   exercises: {
     title: 'Exercices',
+    searchLabel: 'Rechercher un exercice',
+    searchPlaceholder: 'Rechercher…',
+    add: '+ Nouvel exercice',
+    noResult: 'Aucun exercice ne correspond.',
+    addThis: (name: string) => `Ajouter « ${name} »`,
+    newTitle: 'Nouvel exercice',
+    nameLabel: 'Nom',
+    namePlaceholder: 'Ex. : Presse à cuisses',
+    groupLabel: 'Zone travaillée',
+    kindLabel: 'Type',
+    noteLabel: 'Note',
+    noteHint: 'Réglages de la machine, conseils… Tu la reverras pendant ta séance.',
+    notePlaceholder: 'Ex. : siège cran 4, dossier incliné',
+    submit: 'Ajouter l’exercice',
+    notFound: 'Cet exercice n’existe plus.',
+    delete: 'Supprimer l’exercice',
+    deleteTitle: 'Supprimer cet exercice ?',
+    deleteMessage:
+      'Il disparaîtra de ta liste. Si tu l’as déjà utilisé, tes séances passées restent intactes.',
+    deleteConfirm: 'Supprimer',
   },
+
+  kinds: {
+    charge: 'Avec charge',
+    poids_du_corps: 'Poids du corps',
+    cardio: 'Cardio',
+  } satisfies Record<ExerciseKind, string>,
 
   settings: {
     title: 'Réglages',
@@ -34,6 +109,31 @@ export const t = {
 
   templates: {
     newTitle: 'Nouveau modèle',
+    newCta: '+ Nouveau modèle',
+    nameLabel: 'Nom de la séance',
+    nameHint: 'Par exemple « Haut du corps » ou « Séance A ».',
+    create: 'Créer et choisir les exercices',
+    exerciseCount: (n: number) => (n === 0 ? 'Aucun exercice' : n === 1 ? '1 exercice' : `${n} exercices`),
+    exercisesTitle: 'Exercices de la séance',
+    noExercises: 'Aucun exercice pour l’instant. Ajoute ceux que tu fais à la salle.',
+    addExercises: '+ Ajouter des exercices',
+    pickerTitle: 'Choisir les exercices',
+    pickerHint: 'Touche un exercice pour l’ajouter. Touche-le encore pour le retirer.',
+    added: 'Ajouté',
+    done: (n: number) => (n === 0 ? 'Terminé' : `Terminé · ${n} exercice${n > 1 ? 's' : ''}`),
+    sets: (n: number) => (n > 1 ? 'séries' : 'série'),
+    setsHelp: 'Une série = un enchaînement de répétitions sans pause.',
+    moveUp: (name: string) => `Monter ${name}`,
+    moveDown: (name: string) => `Descendre ${name}`,
+    remove: (name: string) => `Retirer ${name}`,
+    lessSets: (name: string) => `Une série de moins pour ${name}`,
+    moreSets: (name: string) => `Une série de plus pour ${name}`,
+    archived: '(archivé)',
+    notFound: 'Ce modèle n’existe plus.',
+    delete: 'Supprimer le modèle',
+    deleteTitle: 'Supprimer ce modèle ?',
+    deleteMessage: 'Les séances que tu as déjà faites avec restent dans ton historique.',
+    deleteConfirm: 'Supprimer',
   },
 
   notFound: {

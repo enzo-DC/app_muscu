@@ -46,6 +46,16 @@
   background: var(--rule);
 }
 
+/* Quadrillage de carnet, à peine visible */
+.grid {
+  min-height: calc(100dvh - 57px);
+  background-image:
+    linear-gradient(rgb(221 214 202 / 0.55) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(221 214 202 / 0.55) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: center top;
+}
+
 .content {
   max-width: var(--content-max);
   margin: 0 auto;
