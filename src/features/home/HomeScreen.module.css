@@ -1,0 +1,23 @@
+.empty {
+  display: grid;
+  gap: var(--s5);
+  padding: var(--s6) 0;
+}
+
+.emptyText {
+  font-size: var(--fs-md);
+  max-width: 32ch;
+}
+
+.settingsLink {
+  width: var(--tap);
+  height: var(--tap);
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+  color: var(--ink);
+}
+
+.settingsLink:active {
+  background: var(--rule);
+}
