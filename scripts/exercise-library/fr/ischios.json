@@ -1,0 +1,26 @@
+{
+  "Dumbbell_Clean": { "n": "Épaulé aux haltères", "i": ["Debout, haltères en main devant les cuisses.", "Plie légèrement puis remonte les haltères aux épaules d’un mouvement explosif.", "Redescends en contrôlant. Technique avancée."] },
+  "Glute_Ham_Raise": { "n": "Glute ham raise (machine)", "i": ["Pieds bloqués, genoux sur le coussin, buste droit.", "Descends le buste vers l’avant en contrôlant avec l’arrière des cuisses.", "Remonte en tirant avec les ischios."] },
+  "Good_Morning": { "n": "Good morning", "i": ["Barre sur le dos, genoux légèrement pliés.", "Penche le buste en avant en poussant les fesses en arrière, dos droit.", "Redresse-toi. Charge légère."] },
+  "Good_Morning_off_Pins": { "n": "Good morning depuis les sécurités", "i": ["Barre posée sur les sécurités à hauteur du ventre.", "Penché sous la barre, redresse-toi en la soulevant sur le dos.", "Repose-la sur les sécurités."] },
+  "Hanging_Bar_Good_Morning": { "n": "Good morning barre suspendue", "i": ["Barre suspendue dans la cage à hauteur du ventre.", "Penché sous la barre, redresse-toi.", "Redescends en contrôlant."] },
+  "Lying_Leg_Curls": { "n": "Leg curl allongé", "i": ["Allongé ventre sur la machine, rouleau au-dessus des talons.", "Plie les jambes pour amener les talons vers les fesses.", "Redescends lentement."] },
+  "Natural_Glute_Ham_Raise": { "n": "Glute ham raise sans machine", "i": ["À genoux, chevilles bloquées sous un rouleau.", "Descends le buste vers l’avant en contrôlant.", "Remonte en tirant avec l’arrière des cuisses. Exercice avancé."] },
+  "Power_Clean": { "n": "Épaulé en puissance", "i": ["Barre au sol, dos droit, prise largeur d’épaules.", "Monte la barre de façon explosive et rattrape-la sur les épaules.", "Technique avancée : apprends-la avec un coach."] },
+  "Reverse_Band_Sumo_Deadlift": { "n": "Soulevé de terre sumo avec élastiques inversés", "i": ["Pieds très écartés, barre suspendue par des élastiques.", "Soulève la barre dos droit.", "Redescends en contrôlant. Exercice avancé."] },
+  "Reverse_Hyperextension": { "n": "Hyperextension inversée", "i": ["Ventre sur le coussin, jambes pendantes accrochées à la machine.", "Monte les jambes vers l’arrière.", "Redescends lentement."] },
+  "Romanian_Deadlift": { "n": "Soulevé de terre roumain", "i": ["Debout, barre devant les cuisses, genoux légèrement pliés.", "Descends la barre le long des jambes en poussant les fesses en arrière, dos droit.", "Remonte en serrant les fessiers."] },
+  "Seated_Leg_Curl": { "n": "Leg curl", "i": ["Assis à la machine, rouleau sous les mollets, cuisses bloquées.", "Plie les jambes pour amener les talons sous le siège.", "Reviens lentement."] },
+  "Smith_Machine_Hang_Power_Clean": { "n": "Épaulé suspendu à la Smith", "i": ["Barre de la Smith à hauteur des genoux.", "Monte la barre de façon explosive jusqu’aux épaules.", "Redescends en contrôlant."] },
+  "Smith_Machine_Stiff-Legged_Deadlift": { "n": "Soulevé de terre jambes tendues à la Smith", "i": ["Barre de la Smith devant les cuisses, jambes presque tendues.", "Descends la barre en poussant les fesses en arrière, dos droit.", "Remonte en serrant les fessiers."] },
+  "Snatch_Pull": { "n": "Tirage d’arraché", "i": ["Barre au sol, prise très large.", "Tire la barre de façon explosive jusqu’au bas du ventre.", "Redescends en contrôlant. Technique avancée."] },
+  "Standing_Leg_Curl": { "n": "Leg curl debout", "i": ["Debout à la machine, rouleau derrière une cheville.", "Plie la jambe pour amener le talon vers la fesse.", "Redescends lentement. Change de jambe après la série."] },
+  "Stiff-Legged_Barbell_Deadlift": { "n": "Soulevé de terre jambes tendues", "i": ["Debout, barre devant les cuisses, jambes presque tendues.", "Descends la barre en poussant les fesses en arrière, dos droit.", "Remonte en serrant les fessiers."] },
+  "Stiff-Legged_Dumbbell_Deadlift": { "n": "Soulevé de terre jambes tendues aux haltères", "i": ["Debout, haltères devant les cuisses, jambes presque tendues.", "Descends les haltères le long des jambes, dos droit.", "Remonte en serrant les fessiers."] },
+  "Sumo_Deadlift": { "n": "Soulevé de terre sumo", "i": ["Pieds très écartés, pointes vers l’extérieur, mains entre les jambes.", "Soulève la barre dos droit en poussant sur les jambes.", "Redescends en contrôlant."] },
+  "Sumo_Deadlift_with_Bands": { "n": "Soulevé de terre sumo avec élastiques", "i": ["Élastiques passés sur la barre et sous les pieds.", "Soulève la barre en sumo, dos droit.", "Redescends en contrôlant. Exercice avancé."] },
+  "Sumo_Deadlift_with_Chains": { "n": "Soulevé de terre sumo avec chaînes", "i": ["Chaînes accrochées à la barre.", "Soulève la barre en sumo, dos droit.", "Redescends en contrôlant. Exercice avancé."] },
+
+  "Thigh_Abductor": { "n": "Abducteurs (machine)", "i": ["Assis, dos plaqué, coussins contre l’extérieur des genoux.", "Écarte les jambes le plus loin possible.", "Reviens lentement sans laisser les charges claquer."] },
+  "Thigh_Adductor": { "n": "Adducteurs (machine)", "i": ["Assis, dos plaqué, coussins contre l’intérieur des genoux.", "Serre les jambes l’une contre l’autre.", "Reviens lentement."] }
+}

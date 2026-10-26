@@ -1,0 +1,104 @@
+.banner {
+  position: fixed;
+  left: var(--s3);
+  right: var(--s3);
+  bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + var(--s2));
+  z-index: 15;
+  max-width: calc(var(--content-max) - 2 * var(--s3));
+  margin: 0 auto;
+  background: var(--glass-dark);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  color: var(--paper-raised);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-float);
+  overflow: hidden;
+}
+
+.row {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding: var(--s2) var(--s3) var(--s2) var(--s4);
+}
+
+.time {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s2);
+}
+
+.label {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.clock {
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-num);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.actions {
+  display: flex;
+  gap: var(--s2);
+}
+
+.button {
+  min-width: var(--tap);
+  height: var(--tap);
+  padding: 0 var(--s3);
+  border: 0;
+  border-radius: 999px;
+  background: rgb(255 253 249 / 0.14);
+  transition: transform 380ms var(--ease-spring), background-color 120ms var(--ease-out);
+  color: inherit;
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+  touch-action: manipulation;
+}
+
+.button:active {
+  background: rgb(255 253 249 / 0.26);
+  transform: scale(0.92);
+  transition-duration: 80ms;
+}
+
+.button:focus-visible {
+  outline-color: var(--paper-raised);
+}
+
+/* Barre de progression linéaire, en bas du bandeau */
+.track {
+  height: 4px;
+  background: rgb(255 253 249 / 0.2);
+}
+
+.bar {
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left center;
+  transition: transform 250ms linear;
+}
+
+.done {
+  background: rgb(201 74 34 / 0.92);
+  color: var(--accent-ink);
+}
+
+.done .bar {
+  background: var(--accent-ink);
+}
+
+.doneText {
+  font-family: var(--font-num);
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}

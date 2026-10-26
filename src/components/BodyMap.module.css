@@ -1,0 +1,10 @@
+.map {
+  display: grid;
+  place-items: center;
+  pointer-events: none; /* dessin seulement : le clic va à la carte ou à la ligne qui le contient */
+}
+
+.map svg {
+  display: block;
+  max-height: 100%;
+}

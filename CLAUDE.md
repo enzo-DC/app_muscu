@@ -185,16 +185,25 @@ C'est 80 % de l'usage, il doit être parfait.
 
 ### Ce qu'il faut ÉVITER absolument (le « look IA »)
 - ❌ Dégradés violet/bleu, fonds en dégradé, effets « glow » ou néon.
-- ❌ Glassmorphism (flous, transparences), ombres énormes et diffuses.
+- ❌ Verre « décoratif » partout (cartes floues sur fond coloré), ombres énormes et diffuses. Le verre est réservé aux barres et surfaces flottantes (voir « Finition Apple »).
 - ❌ Police Inter / Roboto / system-ui par défaut partout.
 - ❌ Emojis dans l'interface, icônes étoiles ✨, mots « Boost », « Unlock », « Supercharge ».
-- ❌ Cartes toutes identiques avec coins très arrondis (24 px+) et icône dans un cercle coloré.
+- ❌ Icône dans un cercle coloré sur chaque carte, arrondis de plus de 22 px.
 - ❌ Textes marketing (« Votre parcours fitness commence ici ! »). On écrit comme un pote qui explique.
+
+### Finition Apple (décidée le 2026-10-26)
+L'app doit avoir la finition d'une app Apple, **en gardant l'ambiance carnet** (papier, encre, accent brique, Barlow Condensed pour les chiffres) :
+- **Verre** : barre du haut, barre d'onglets, feuilles de confirmation et capsule de repos en verre dépoli (`--glass*`, `--glass-blur` dans `tokens.css`), avec repli opaque si le navigateur ne gère pas le flou.
+- **Navigation iOS** : grand titre dans la page, petit titre centré dans la barre au défilement ; retour « ‹ Retour » ; l'écran plus profond arrive par la droite, le retour par la gauche.
+- **Listes groupées** façon Réglages iOS : blocs blancs arrondis (`--radius-lg`), séparateurs fins décalés.
+- **Boutons** : principal plein (accent), secondaires gris translucides (`--fill`), boutons ronds pour − / +, pastilles en gélule.
+- **Animations à ressort** (`src/lib/motion.ts`) : appui qui s'enfonce et rebondit, chiffres qui défilent, case ✓ qui « pop », feuilles qui montent du bas. Toujours désactivées par `prefers-reduced-motion`.
+- **Haptique** : micro-vibration à la validation d'une série (si le réglage « vibrer » est actif).
 
 ### Ambiance retenue : « carnet d'atelier »
 - Fond **papier chaud** (blanc cassé), texte **encre** presque noire, **une seule couleur d'accent** franche utilisée avec parcimonie (bouton principal, série validée, minuteur).
 - Les **chiffres sont les héros** : charges et reps en grand, police condensée et chasse fixe (`font-variant-numeric: tabular-nums`) pour que les colonnes s'alignent.
-- Séparations par **filets fins** (1 px) plutôt que par des cartes flottantes avec ombre. Rayons de bordure modestes (6–10 px).
+- Séparations par **filets fins** et blocs groupés plutôt que par des cartes flottantes avec grosse ombre. Rayons : 10 px (boutons, champs), 14 px (blocs, cartes), 22 px (feuilles, capsule).
 - Un petit détail graphique qui donne du caractère : par ex. les numéros de série en style étiquette/tampon, ou un léger quadrillage de carnet en fond de l'écran de séance. Un seul, discret.
 
 ### Tokens (dans `src/styles/tokens.css`)
@@ -238,7 +247,7 @@ Tu peux ajuster ces valeurs si quelque chose ne marche pas visuellement, mais ga
 
 ### Animations : petites, utiles, rapides
 Les animations servent à **comprendre ce qui se passe**, pas à décorer.
-- Durées : **150–250 ms**, easing `easeOut`. Jamais plus de 400 ms.
+- Ressorts amortis (voir `src/lib/motion.ts`) ou **150–250 ms** en `easeOut`. Un mouvement ne doit jamais sembler traîner (≈ 450 ms max).
 - Exemples voulus :
   - Valider une série : la case ✓ se remplit, la ligne s'atténue légèrement (scale 0.98 → 1).
   - Les − / + : petit « tick » vertical du chiffre qui change (le nombre glisse vers le haut/bas).

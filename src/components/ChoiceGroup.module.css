@@ -28,22 +28,28 @@
   margin: 0;
 }
 
+/* Pastilles en gélule, grises ; le choix actif est plein, à l'encre */
 .chip {
   min-height: var(--tap);
   display: flex;
   align-items: center;
-  padding: 0 var(--s3);
-  border: 1px solid var(--ink-soft);
-  border-radius: var(--radius);
-  background: var(--paper-raised);
+  padding: 0 var(--s4);
+  border-radius: 999px;
+  background: var(--fill);
   cursor: pointer;
-  transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+  transition:
+    background-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out),
+    transform 380ms var(--ease-spring);
 }
 
-/* Choix sélectionné : encre pleine, comme une case noircie au stylo */
+.option:active .chip {
+  transform: scale(0.95);
+  transition-duration: 90ms;
+}
+
 .input:checked + .chip {
   background: var(--ink);
-  border-color: var(--ink);
   color: var(--paper-raised);
   font-weight: 700;
 }

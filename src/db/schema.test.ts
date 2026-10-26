@@ -1,3 +1,4 @@
+import Dexie from 'dexie';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { db, DEFAULT_SETTINGS } from './schema';
 import { SEED_EXERCISES } from './seed';
@@ -26,6 +27,25 @@ describe('base de données', () => {
     expect(settings).toEqual(DEFAULT_SETTINGS);
     expect(settings?.defaultRestSeconds).toBe(90);
     expect(settings?.weightStep).toBe(2.5);
+  });
+
+  it('migration v1 → v2 : relie les exercices pré-remplis à la bibliothèque, sans rien perdre', async () => {
+    db.close();
+    await Dexie.delete('carnet-de-salle');
+    const v1 = new Dexie('carnet-de-salle');
+    v1.version(1).stores({ exercises: 'id, group, name', templates: 'id, updatedAt', sessions: 'id, startedAt, finishedAt, templateId', settings: 'id' });
+    await v1.table('exercises').bulkAdd([
+      { id: 'press', name: 'Presse à cuisses', group: 'jambes', kind: 'charge', note: 'cran 4', archived: false, createdAt: 1 },
+      { id: 'mine', name: 'Mon exo perso', group: 'dos', kind: 'charge', archived: false, createdAt: 2 },
+    ]);
+    await v1.table('sessions').add({ id: 's', name: 'A', startedAt: 1, finishedAt: 2, exercises: [{ exerciseId: 'press', sets: [] }] });
+    v1.close();
+
+    await db.open();
+    expect(db.verno).toBe(2);
+    expect(await db.exercises.get('press')).toMatchObject({ libraryId: 'Leg_Press', note: 'cran 4' });
+    expect((await db.exercises.get('mine'))?.libraryId).toBeUndefined();
+    expect(await db.sessions.count()).toBe(1);
   });
 
   it('ne re-seed pas une base existante', async () => {

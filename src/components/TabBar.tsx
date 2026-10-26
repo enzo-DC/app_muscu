@@ -1,4 +1,6 @@
+import { motion } from 'motion/react';
 import { Link, useLocation } from 'react-router';
+import { spring } from '../lib/motion';
 import { t } from '../lib/strings';
 import { Icon } from './Icon';
 import styles from './TabBar.module.css';
@@ -16,6 +18,8 @@ function activeTab(pathname: string): string {
   return '/';
 }
 
+const MotionLink = motion.create(Link);
+
 export function TabBar() {
   const { pathname } = useLocation();
   const active = activeTab(pathname);
@@ -26,14 +30,22 @@ export function TabBar() {
           const isActive = tab.to === active;
           return (
             <li key={tab.to}>
-              <Link
+              <MotionLink
                 to={tab.to}
                 className={`${styles.tab} ${isActive ? styles.active : ''}`}
                 aria-current={isActive ? 'page' : undefined}
+                whileTap={{ scale: 0.9 }}
+                transition={spring.snappy}
               >
-                <Icon name={tab.icon} />
+                <motion.span
+                  className={styles.icon}
+                  animate={{ scale: isActive ? 1.08 : 1 }}
+                  transition={spring.bouncy}
+                >
+                  <Icon name={tab.icon} size={26} />
+                </motion.span>
                 {tab.label}
-              </Link>
+              </MotionLink>
             </li>
           );
         })}

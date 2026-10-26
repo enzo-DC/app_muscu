@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Fond papier plein (icône « maskable » : le système peut la découper en rond) -->
+  <rect width="512" height="512" fill="#F5F1EA"/>
+  <!-- Quadrillage de carnet -->
+  <g stroke="#DDD6CA" stroke-width="4">
+    <path d="M0 96H512M0 160H512M0 224H512M0 288H512M0 352H512M0 416H512"/>
+    <path d="M96 0V512M160 0V512M224 0V512M288 0V512M352 0V512M416 0V512"/>
+  </g>
+  <!-- Barre et disques, à l'encre -->
+  <g fill="#1C1B19">
+    <rect x="120" y="244" width="272" height="24" rx="6"/>
+    <rect x="142" y="176" width="40" height="160" rx="8"/>
+    <rect x="102" y="204" width="30" height="104" rx="7"/>
+    <rect x="330" y="176" width="40" height="160" rx="8"/>
+    <rect x="380" y="204" width="30" height="104" rx="7"/>
+  </g>
+  <!-- Le seul accent -->
+  <rect x="190" y="360" width="132" height="18" rx="9" fill="#C94A22"/>
+</svg>

@@ -8,6 +8,8 @@ type Props = {
   max?: number;
   step?: number;
   unit?: string;
+  /** Affichage de la valeur (par défaut : nombre fr-FR). */
+  format?: (value: number) => string;
   decreaseLabel: string;
   increaseLabel: string;
 };
@@ -20,6 +22,7 @@ export function Stepper({
   max = Infinity,
   step = 1,
   unit,
+  format = formatNumber,
   decreaseLabel,
   increaseLabel,
 }: Props) {
@@ -35,7 +38,7 @@ export function Stepper({
         −
       </button>
       <span className={styles.value} aria-live="polite">
-        <span className={styles.number}>{formatNumber(value)}</span>
+        <span className={styles.number}>{format(value)}</span>
         {unit && <span className={styles.unit}>{unit}</span>}
       </span>
       <button

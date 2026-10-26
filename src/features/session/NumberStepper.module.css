@@ -4,26 +4,30 @@
   gap: var(--s2);
 }
 
+/* Boutons ronds gris, qui s'enfoncent et rebondissent */
 .button {
   flex: none;
   width: var(--tap);
   height: var(--tap);
   display: grid;
   place-items: center;
-  border: 1px solid var(--ink-soft);
-  border-radius: var(--radius);
-  background: var(--paper-raised);
+  border: 0;
+  border-radius: 50%;
+  background: var(--fill);
+  color: var(--ink);
   font-family: var(--font-num);
   font-size: var(--fs-xl);
   font-weight: 500;
   line-height: 1;
   touch-action: manipulation; /* pas de zoom au double tap */
-  transition: transform var(--dur) var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 380ms var(--ease-spring), background-color 120ms var(--ease-out);
 }
 
 .button:active:not(:disabled) {
-  transform: scale(0.94);
-  background: var(--rule);
+  transform: scale(0.88);
+  background: var(--fill-pressed);
+  transition-duration: 80ms;
 }
 
 .button:disabled {
@@ -42,6 +46,13 @@
   width: 72px;
 }
 
+/* Le champ et les chiffres animés sont superposés */
+.number {
+  position: relative;
+  width: 100%;
+  display: block;
+}
+
 .input {
   width: 100%;
   padding: 0;
@@ -57,13 +68,36 @@
   line-height: 1.05;
 }
 
+/* Quand on ne tape pas, le texte du champ est caché derrière les chiffres animés */
+.inputHidden {
+  color: transparent;
+  caret-color: transparent;
+}
+
 .input:focus-visible {
   outline: 0;
   border-bottom-color: var(--ink);
 }
 
 .input::placeholder {
-  color: var(--ink-soft);
+  color: transparent;
+}
+
+.roller {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  pointer-events: none; /* le tap atteint le champ dessous */
+}
+
+.rollValue {
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-num);
+  font-weight: 600;
+  line-height: 1.05;
 }
 
 .unit {

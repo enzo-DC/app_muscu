@@ -6,7 +6,7 @@ import { Button, ButtonLink } from '../../components/Button';
 import { ConfirmDialog } from '../../components/ConfirmDialog';
 import { Screen } from '../../components/Screen';
 import { getExercisesById } from '../../db/exercises';
-import type { Exercise, Session } from '../../db/schema';
+import type { Exercise, Session, Settings } from '../../db/schema';
 import { deleteSession, finishSession, getActiveSession } from '../../db/sessions';
 import { getSettings } from '../../db/settings';
 import { formatTimer } from '../../lib/format';
@@ -14,6 +14,7 @@ import { sessionSummary, setsProgress } from '../../lib/stats';
 import { t } from '../../lib/strings';
 import { useNow } from '../../lib/useNow';
 import { ExerciseCard } from './ExerciseCard';
+import { RestTimer } from './RestTimer';
 import styles from './SessionScreen.module.css';
 import { SessionStats } from './SessionStats';
 
@@ -39,7 +40,7 @@ export function SessionScreen() {
       key={session.id}
       session={session}
       exercisesById={exercisesById}
-      weightStep={settings.weightStep}
+      settings={settings}
     />
   );
 }
@@ -54,9 +55,9 @@ function firstIncomplete(session: Session, after = -1, skip?: number): number | 
   return null;
 }
 
-type ActiveProps = { session: Session; exercisesById: Map<string, Exercise>; weightStep: number };
+type ActiveProps = { session: Session; exercisesById: Map<string, Exercise>; settings: Settings };
 
-function ActiveSession({ session, exercisesById, weightStep }: ActiveProps) {
+function ActiveSession({ session, exercisesById, settings }: ActiveProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const now = useNow();
@@ -137,7 +138,9 @@ function ActiveSession({ session, exercisesById, weightStep }: ActiveProps) {
             item={item}
             exercise={exercisesById.get(item.exerciseId)}
             open={openIndex === index}
-            weightStep={weightStep}
+            weightStep={settings.weightStep}
+            restSeconds={settings.defaultRestSeconds}
+            haptics={settings.vibrate}
             onToggleOpen={() => setOpenIndex(openIndex === index ? null : index)}
             onSetCompleted={(complete) => handleSetCompleted(index, complete)}
           />
@@ -152,6 +155,10 @@ function ActiveSession({ session, exercisesById, weightStep }: ActiveProps) {
           {t.session.delete}
         </button>
       </div>
+
+      {/* Place pour que le bandeau de repos ne cache pas le bas de la page */}
+      {session.rest && <div className={styles.restSpacer} aria-hidden="true" />}
+      <RestTimer session={session} vibrateEnabled={settings.vibrate} />
 
       <ConfirmDialog
         open={dialog === 'finish'}

@@ -1,54 +1,82 @@
+/* Barre du haut en verre : le contenu glisse dessous, flouté */
 .header {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--paper);
-  border-bottom: 1px solid var(--rule);
   padding-top: env(safe-area-inset-top);
+  background: var(--glass);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: 0 0.5px 0 transparent;
+  transition: box-shadow var(--dur) var(--ease-out);
+}
+
+/* Le filet n'apparaît qu'une fois qu'on a fait défiler, comme sur iOS */
+.scrolled {
+  box-shadow: 0 0.5px 0 var(--hairline);
 }
 
 .bar {
   max-width: var(--content-max);
   margin: 0 auto;
-  min-height: 56px;
-  display: flex;
+  min-height: var(--navbar-h);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   gap: var(--s2);
-  padding: 0 var(--s2) 0 var(--s4);
+  padding: 0 var(--s2);
 }
 
-.bar.hasBack {
-  padding-left: var(--s1);
+.side {
+  display: flex;
+  align-items: center;
+  min-width: 0;
 }
 
-.title {
-  flex: 1;
-  font-size: var(--fs-xl);
+.sideEnd {
+  justify-content: flex-end;
+  grid-column: 3;
+}
+
+.back {
+  min-height: var(--tap);
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 var(--s2) 0 0;
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity var(--dur) var(--ease-out);
+}
+
+.back:active {
+  opacity: 0.5;
+}
+
+.compactTitle {
+  grid-column: 2;
+  max-width: 52vw;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-family: var(--font-num);
+  font-size: var(--fs-lg);
+  font-weight: 600;
 }
 
-.iconButton {
-  flex: none;
-  width: var(--tap);
-  height: var(--tap);
-  display: grid;
-  place-items: center;
-  border: 0;
-  border-radius: var(--radius);
-  background: transparent;
-  color: var(--ink);
-  text-decoration: none;
-}
-
-.iconButton:active {
-  background: var(--rule);
+/* Grand titre, dans la page */
+.largeTitle {
+  margin: var(--s1) 0 var(--s4);
+  font-size: 2.375rem;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
 }
 
 /* Quadrillage de carnet, à peine visible */
 .grid {
-  min-height: calc(100dvh - 57px);
+  min-height: calc(100dvh - var(--navbar-h));
   background-image:
     linear-gradient(rgb(221 214 202 / 0.55) 1px, transparent 1px),
     linear-gradient(90deg, rgb(221 214 202 / 0.55) 1px, transparent 1px);
@@ -59,5 +87,23 @@
 .content {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: var(--s4) var(--s4) calc(var(--tabbar-h) + var(--s6) + env(safe-area-inset-bottom));
+  padding: 0 var(--s4) calc(var(--tabbar-h) + var(--s6) + env(safe-area-inset-bottom));
+}
+
+/* Bouton rond « verre » pour la barre (réglages…) */
+.iconButton {
+  flex: none;
+  width: var(--tap);
+  height: var(--tap);
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.iconButton:active {
+  background: var(--fill-pressed);
 }

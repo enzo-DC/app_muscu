@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Session } from '../db/schema';
-import { sessionSummary, setsProgress } from './stats';
+import { lastPerformance, prefillSets, sessionSummary, setsProgress } from './stats';
 
 const session: Session = {
   id: 's',
@@ -27,6 +27,50 @@ describe('stats', () => {
 
   it('calcule la durée d’une séance en cours avec l’heure actuelle', () => {
     expect(sessionSummary({ ...session, finishedAt: undefined }, 60_000).durationSec).toBe(60);
+  });
+
+  it('trouve la dernière performance : séance terminée la plus récente, séries faites', () => {
+    const old: Session = { ...session, id: 'old', startedAt: -10, finishedAt: -5, exercises: [{ exerciseId: 'a', sets: [{ weightKg: 30, reps: 10, done: true }] }] };
+    const running: Session = { ...session, id: 'run', startedAt: 100, finishedAt: undefined };
+    const last = lastPerformance([old, session, running], 'a');
+    expect(last?.sessionId).toBe('s');
+    expect(last?.sets).toEqual([
+      { weightKg: 40, reps: 10, done: true },
+      { weightKg: 42.5, reps: 8, done: true },
+    ]);
+    expect(lastPerformance([old, session], 'zzz')).toBeUndefined();
+  });
+
+  it('regroupe les séries si l’exercice apparaît deux fois dans la séance', () => {
+    const twice: Session = {
+      ...session,
+      exercises: [
+        { exerciseId: 'a', sets: [{ weightKg: 40, reps: 10, done: true }] },
+        { exerciseId: 'a', sets: [{ weightKg: 45, reps: 6, done: true }] },
+      ],
+    };
+    expect(lastPerformance([twice], 'a')?.sets.map((s) => s.weightKg)).toEqual([40, 45]);
+  });
+
+  it('pré-remplit série par série, puis répète la dernière', () => {
+    const last = [
+      { weightKg: 40, reps: 10, done: true },
+      { weightKg: 42.5, reps: 8, done: true, completedAt: 5 },
+    ];
+    expect(prefillSets(3, 'charge', last)).toEqual([
+      { weightKg: 40, reps: 10, done: false },
+      { weightKg: 42.5, reps: 8, done: false },
+      { weightKg: 42.5, reps: 8, done: false },
+    ]);
+  });
+
+  it('sans historique : séries vierges, reps cible du modèle', () => {
+    expect(prefillSets(2, 'charge', undefined, 12)).toEqual([
+      { weightKg: undefined, reps: 12, done: false },
+      { weightKg: undefined, reps: 12, done: false },
+    ]);
+    expect(prefillSets(1, 'poids_du_corps')).toEqual([{ reps: 10, done: false }]);
+    expect(prefillSets(1, 'cardio')).toEqual([{ durationSec: 600, done: false }]);
   });
 
   it('compte la progression d’un exercice', () => {

@@ -13,8 +13,11 @@
   color: var(--ink-soft);
 }
 
+/* Bouton de barre en gélule, comme les boutons de barre d'iOS */
 .finishButton {
+  min-height: var(--tap);
   padding: 0 var(--s4);
+  border-radius: 999px;
 }
 
 .none {
@@ -29,13 +32,15 @@
 
 .card {
   scroll-margin-top: 72px;
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   background: var(--paper-raised);
+  box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 3px rgb(28 27 25 / 0.06);
+  overflow: hidden;
+  transition: box-shadow 300ms var(--ease-out);
 }
 
 .cardOpen {
-  border-color: var(--ink);
+  box-shadow: 0 0 0 0.5px var(--hairline), var(--shadow-float);
 }
 
 .cardTitle {
@@ -55,6 +60,12 @@
   border: 0;
   background: transparent;
   text-align: left;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 120ms var(--ease-out);
+}
+
+.cardHeader:active {
+  background: var(--fill);
 }
 
 .cardName {
@@ -88,7 +99,7 @@
   display: grid;
   color: var(--ink-soft);
   transform: rotate(90deg);
-  transition: transform var(--dur) var(--ease-out);
+  transition: transform 420ms var(--ease-spring);
 }
 
 .chevronOpen {
@@ -107,6 +118,38 @@
   font-size: var(--fs-sm);
 }
 
+/* « Dernière fois · lun. 12 oct.  37,5 × 10 · 37,5 × 10 » */
+.lastTime {
+  display: grid;
+  gap: 2px;
+  margin: 0 var(--s4) var(--s3);
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+}
+
+.lastTimeLabel {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.lastTimeSets {
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.setPrevious {
+  margin-left: var(--s2);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--ink-soft);
+}
+
 /* Séries */
 .sets {
   margin: 0;
@@ -116,12 +159,24 @@
 
 /* Ligne compacte : SÉRIE 1   37,5 kg × 10   [✓] */
 .set {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--s3);
   padding: var(--s1) var(--s3) var(--s1) 0;
-  border-top: 1px solid var(--rule);
   transition: background-color var(--dur) var(--ease-out);
+}
+
+/* Séparateur fin décalé entre les séries, façon iOS */
+.set::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--s4);
+  right: 0;
+  height: 1px;
+  background: var(--hairline);
+  transform: scaleY(0.5);
 }
 
 .setSummary {
@@ -182,12 +237,21 @@
   height: var(--tap);
   display: grid;
   place-items: center;
-  border: 2px solid var(--ink);
-  border-radius: var(--radius);
+  border: 2px solid var(--ink-soft);
+  border-radius: 50%;
   background: var(--paper-raised);
   color: var(--ink-soft);
   touch-action: manipulation;
-  transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 420ms var(--ease-spring),
+    background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out);
+}
+
+.checkIcon {
+  display: grid;
 }
 
 .checkLarge {
@@ -195,6 +259,8 @@
   width: 72px;
   height: auto;
   align-self: stretch;
+  border-radius: 36px;
+  border-color: var(--ink);
 }
 
 .check svg {
@@ -202,12 +268,13 @@
 }
 
 .check:active {
-  transform: scale(0.94);
+  transform: scale(0.9);
+  transition-duration: 80ms;
 }
 
 /* Série faite : la case se remplit, la ligne s'atténue */
 .setDone {
-  background: var(--paper);
+  background: rgb(201 74 34 / 0.05);
 }
 
 .setDone .setValues,
@@ -226,17 +293,29 @@
 }
 
 .textButton {
+  position: relative;
   width: 100%;
   min-height: var(--tap);
   border: 0;
-  border-top: 1px solid var(--rule);
   background: transparent;
   font-weight: 700;
   color: var(--ink);
+  transition: background-color 120ms var(--ease-out);
+}
+
+.textButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--s4);
+  right: 0;
+  height: 1px;
+  background: var(--hairline);
+  transform: scaleY(0.5);
 }
 
 .textButton:active {
-  background: var(--rule);
+  background: var(--fill);
 }
 
 /* Bas de page */
@@ -257,6 +336,10 @@
   text-underline-offset: 3px;
 }
 
+.restSpacer {
+  height: 96px;
+}
+
 .undoneWarning {
   margin-bottom: var(--s5);
   color: var(--ink-soft);
@@ -268,8 +351,9 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin: 0 0 var(--s5);
-  border-top: 1px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
+  background: var(--paper-raised);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 0 0.5px var(--hairline);
 }
 
 .stat {
@@ -277,7 +361,7 @@
 }
 
 .stat + .stat {
-  border-left: 1px solid var(--rule);
+  box-shadow: inset 0.5px 0 0 var(--hairline);
 }
 
 .stat dt {
@@ -329,6 +413,18 @@
 .pickerTools {
   display: grid;
   gap: var(--s5);
+}
+
+.addMark {
+  flex: none;
+  width: var(--tap);
+  height: var(--tap);
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--ink-soft);
+  border-radius: var(--radius);
+  font-family: var(--font-num);
+  font-size: var(--fs-xl);
 }
 
 .pickerHint {

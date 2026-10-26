@@ -1,0 +1,187 @@
+.empty {
+  padding: var(--s5) 0;
+  max-width: 32ch;
+}
+
+/* Liste par semaine */
+.week + .week {
+  margin-top: var(--s5);
+}
+
+.weekTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 var(--s3) var(--s2);
+  font-size: var(--fs-md);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+
+.weekCount {
+  font-family: var(--font-text);
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--ink-soft);
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--paper-raised);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 0 0.5px var(--hairline);
+  overflow: hidden;
+}
+
+.item {
+  position: relative;
+}
+
+/* Séparateur fin décalé, façon iOS */
+.item + .item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 64px;
+  right: 0;
+  height: 1px;
+  background: var(--hairline);
+  transform: scaleY(0.5);
+}
+
+.row {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: var(--s2) var(--s3);
+  color: var(--ink);
+  text-decoration: none;
+  transition: background-color 120ms var(--ease-out);
+}
+
+.row:active {
+  background: var(--fill);
+}
+
+/* La date en colonne fixe, comme dans la marge d'un carnet */
+.date {
+  flex: none;
+  width: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.weekday {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
+.day {
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-xl);
+  font-weight: 600;
+}
+
+.text {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  display: block;
+  font-size: var(--fs-md);
+  font-weight: 700;
+}
+
+.meta {
+  display: block;
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+}
+
+.chevron {
+  flex: none;
+  color: var(--ink-soft);
+}
+
+/* Détail d'une séance */
+.when {
+  margin-bottom: var(--s4);
+  color: var(--ink-soft);
+}
+
+.exercise {
+  margin-top: var(--s5);
+}
+
+.exerciseName {
+  padding: 0 var(--s3) var(--s2);
+  font-size: var(--fs-lg);
+}
+
+.sets {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: var(--paper-raised);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 0 0.5px var(--hairline);
+  overflow: hidden;
+}
+
+.set {
+  position: relative;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  padding: 0 var(--s4);
+}
+
+/* Séparateur fin décalé, façon iOS */
+.set + .set::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--s4);
+  right: 0;
+  height: 1px;
+  background: var(--hairline);
+  transform: scaleY(0.5);
+}
+
+.setNumber {
+  width: 7ch;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+
+.setValue {
+  font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}
+
+.dangerZone {
+  margin-top: var(--s6);
+}
+
+.deleteButton {
+  color: var(--danger);
+}

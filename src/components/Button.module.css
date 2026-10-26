@@ -1,20 +1,27 @@
 .button {
-  min-height: var(--tap);
+  min-height: 50px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--s2);
   padding: 0 var(--s5);
-  border-radius: var(--radius);
-  border: 1px solid var(--ink);
+  border: 0;
+  border-radius: 12px;
   font-weight: 700;
   font-size: var(--fs-md);
   text-decoration: none;
-  transition: transform var(--dur) var(--ease-out), background-color var(--dur) var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+  /* Relâché : retour avec un léger rebond */
+  transition:
+    transform 420ms var(--ease-spring),
+    background-color var(--dur) var(--ease-out),
+    opacity var(--dur) var(--ease-out);
 }
 
+/* Appui : on s'enfonce vite */
 .button:active:not(:disabled) {
-  transform: scale(0.98);
+  transform: scale(0.96);
+  transition-duration: 90ms;
 }
 
 .button:disabled {
@@ -22,15 +29,25 @@
   cursor: not-allowed;
 }
 
+/* Plein, teinte de l'app : l'action principale de l'écran */
 .primary {
   background: var(--accent);
-  border-color: var(--accent);
   color: var(--accent-ink);
+  box-shadow: 0 1px 2px rgb(201 74 34 / 0.3);
 }
 
+.primary:active:not(:disabled) {
+  background: #B4401C;
+}
+
+/* Gris translucide, comme les boutons secondaires d'iOS */
 .secondary {
-  background: transparent;
+  background: var(--fill);
   color: var(--ink);
+}
+
+.secondary:active:not(:disabled) {
+  background: var(--fill-pressed);
 }
 
 .block {

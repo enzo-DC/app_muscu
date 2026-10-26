@@ -9,15 +9,15 @@
 }
 
 .sectionTitle {
-  padding-bottom: var(--s1);
-  border-bottom: 1px solid var(--ink);
-  font-size: var(--fs-lg);
+  padding: 0 var(--s3);
+  font-size: var(--fs-md);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
 }
 
 .help {
-  margin-top: var(--s2);
+  margin: var(--s1) var(--s3) var(--s3);
   color: var(--ink-soft);
   font-size: var(--fs-sm);
 }
@@ -26,17 +26,33 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  background: var(--paper-raised);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 0 0.5px var(--hairline);
+  overflow: hidden;
 }
 
 .item {
+  position: relative;
   display: grid;
   grid-template-columns: 2ch 1fr auto;
   column-gap: var(--s3);
   row-gap: var(--s2);
   align-items: center;
-  padding: var(--s3) 0;
-  border-bottom: 1px solid var(--rule);
-  background: var(--paper);
+  padding: var(--s3);
+  background: var(--paper-raised);
+}
+
+/* Séparateur fin décalé, façon iOS */
+.item + .item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--s3);
+  right: 0;
+  height: 1px;
+  background: var(--hairline);
+  transform: scaleY(0.5);
 }
 
 .index {
@@ -76,14 +92,17 @@
   height: var(--tap);
   display: grid;
   place-items: center;
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  background: var(--fill);
   color: var(--ink);
+  transition: transform 380ms var(--ease-spring), background-color 120ms var(--ease-out);
 }
 
 .iconButton:active:not(:disabled) {
-  background: var(--rule);
+  background: var(--fill-pressed);
+  transform: scale(0.9);
+  transition-duration: 90ms;
 }
 
 .iconButton:disabled {
@@ -92,7 +111,7 @@
 }
 
 .removeButton {
-  border-color: transparent;
+  background: transparent;
   color: var(--ink-soft);
 }
 
@@ -102,12 +121,9 @@
 
 .dangerZone {
   margin-top: var(--s5);
-  padding-top: var(--s5);
-  border-top: 1px solid var(--rule);
 }
 
 .deleteButton {
-  border-color: var(--danger);
   color: var(--danger);
 }
 
@@ -117,7 +133,17 @@
   font-size: var(--fs-sm);
 }
 
+/* Ligne-bouton : remet à zéro le style par défaut d'un <button> */
+.pickRow {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+}
+
 .check {
+  flex: none;
   width: 28px;
   height: 28px;
   display: grid;
@@ -132,20 +158,15 @@
   border-color: var(--ink);
 }
 
-.picked .addedLabel {
-  color: var(--ink);
-}
 
-.addedLabel {
-  font-size: var(--fs-sm);
-  font-weight: 700;
-}
 
+/* Bouton « Terminé » flottant au-dessus de la barre d'onglets, sur du verre */
 .doneBar {
   position: sticky;
   bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
-  margin-top: var(--s5);
-  padding: var(--s3) 0;
-  background: var(--paper);
-  border-top: 1px solid var(--rule);
+  margin: var(--s5) calc(-1 * var(--s4)) 0;
+  padding: var(--s3) var(--s4);
+  background: var(--glass);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
 }

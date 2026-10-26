@@ -1,13 +1,16 @@
 import { motion } from 'motion/react';
 import { Icon } from '../../components/Icon';
 import type { ExerciseKind, SetEntry } from '../../db/schema';
-import { formatNumber } from '../../lib/format';
+import { formatSet } from '../../lib/format';
+import { spring } from '../../lib/motion';
 import { t } from '../../lib/strings';
 import { NumberStepper } from './NumberStepper';
 import styles from './SessionScreen.module.css';
 
 type Props = {
   set: SetEntry;
+  /** La même série lors de la dernière séance, si elle existe. */
+  previous?: SetEntry;
   number: number;
   kind: ExerciseKind;
   weightStep: number;
@@ -18,19 +21,7 @@ type Props = {
   onToggle: () => void;
 };
 
-/** « 37,5 kg × 10 », « 12 reps » ou « 10 min » selon le type d'exercice. */
-function summary(set: SetEntry, kind: ExerciseKind): string {
-  const dash = '–';
-  if (kind === 'cardio') {
-    return `${set.durationSec === undefined ? dash : formatNumber(Math.round(set.durationSec / 60))}\u00a0${t.session.minutes}`;
-  }
-  const reps = set.reps === undefined ? dash : String(set.reps);
-  if (kind === 'poids_du_corps') return `${reps}\u00a0${t.session.reps}`;
-  const kg = set.weightKg === undefined ? dash : formatNumber(set.weightKg);
-  return `${kg}\u00a0kg × ${reps}`;
-}
-
-export function SetRow({ set, number, kind, weightStep, expanded, onExpand, onChange, onToggle }: Props) {
+export function SetRow({ set, previous, number, kind, weightStep, expanded, onExpand, onChange, onToggle }: Props) {
   const check = (
     <button
       type="button"
@@ -39,7 +30,14 @@ export function SetRow({ set, number, kind, weightStep, expanded, onExpand, onCh
       aria-pressed={set.done}
       onClick={onToggle}
     >
-      <Icon name="check" size={expanded ? 36 : 28} />
+      {/* Petit « pop » à ressort quand la série est validée */}
+      <motion.span
+        className={styles.checkIcon}
+        animate={set.done ? { scale: [0.5, 1.2, 1] } : { scale: 1 }}
+        transition={spring.bouncy}
+      >
+        <Icon name="check" size={expanded ? 36 : 28} />
+      </motion.span>
     </button>
   );
 
@@ -47,10 +45,16 @@ export function SetRow({ set, number, kind, weightStep, expanded, onExpand, onCh
     <motion.li
       className={`${styles.set} ${set.done ? styles.setDone : ''} ${expanded ? styles.setExpanded : ''}`}
       animate={set.done ? { scale: [0.98, 1] } : { scale: 1 }}
+      transition={spring.smooth}
     >
       {expanded ? (
         <>
-          <span className={styles.setLabel}>{t.session.setLabel(number)}</span>
+          <span className={styles.setLabel}>
+            {t.session.setLabel(number)}
+            {previous && (
+              <span className={styles.setPrevious}>{t.session.lastTimeSet(formatSet(previous, kind))}</span>
+            )}
+          </span>
           <div className={styles.setValues}>
             {kind === 'charge' && (
               <NumberStepper
@@ -90,7 +94,7 @@ export function SetRow({ set, number, kind, weightStep, expanded, onExpand, onCh
         <>
           <button type="button" className={styles.setSummary} onClick={onExpand} aria-label={t.session.editSet(number)}>
             <span className={styles.setLabel}>{t.session.setLabel(number)}</span>
-            <span className={styles.setSummaryValue}>{summary(set, kind)}</span>
+            <span className={styles.setSummaryValue}>{formatSet(set, kind)}</span>
           </button>
           {check}
         </>

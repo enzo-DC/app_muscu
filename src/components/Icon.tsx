@@ -1,4 +1,15 @@
-type IconName = 'list' | 'clock' | 'dumbbell' | 'gear' | 'back' | 'chevron' | 'up' | 'down' | 'close' | 'check';
+type IconName =
+  | 'list'
+  | 'clock'
+  | 'dumbbell'
+  | 'gear'
+  | 'back'
+  | 'chevron'
+  | 'up'
+  | 'down'
+  | 'close'
+  | 'check'
+  | 'search';
 
 const PATHS: Record<IconName, string> = {
   // Lignes de carnet
@@ -13,6 +24,7 @@ const PATHS: Record<IconName, string> = {
   down: 'M12 5v14M6 13l6 6 6-6',
   close: 'M6 6l12 12M18 6 6 18',
   check: 'M5 12.5l4.5 4.5L19 7.5',
+  search: 'M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14ZM20 20l-4-4',
 };
 
 export function Icon({ name, size = 24 }: { name: IconName; size?: number }) {

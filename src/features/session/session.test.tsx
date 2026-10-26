@@ -125,6 +125,54 @@ describe('séance en cours', () => {
     expect(saved?.exercises[0]?.sets).toHaveLength(1);
   });
 
+  it('affiche la dernière fois et pré-remplit les séries avec', async () => {
+    const user = userEvent.setup();
+    await db.sessions.add({
+      id: 'prev',
+      templateId: 'tpl',
+      name: 'Séance A',
+      startedAt: new Date(2026, 9, 12, 18).getTime(),
+      finishedAt: new Date(2026, 9, 12, 19).getTime(),
+      exercises: [
+        {
+          exerciseId: pressId,
+          sets: [
+            { weightKg: 40, reps: 10, done: true },
+            { weightKg: 42.5, reps: 8, done: true },
+          ],
+        },
+      ],
+    });
+    renderAt('/');
+    await user.click(await screen.findByRole('button', { name: 'Démarrer Séance A' }));
+
+    const press = await screen.findByRole('region', { name: 'Presse à cuisses' });
+    expect(await within(press).findByText('40 × 10 · 42,5 × 8')).toBeInTheDocument();
+    expect(within(press).getByText(/lun\. 12 oct\./)).toBeInTheDocument();
+    expect(within(press).getByText(/dernière fois : 40\s+kg × 10/)).toBeInTheDocument();
+    expect(within(press).getByRole('textbox', { name: 'Charge de la série 1, en kilos' })).toHaveValue('40');
+
+    // Leg curl jamais fait : message pour débutant
+    await user.click(within(card('Leg curl')).getByRole('button', { name: /Leg curl/ }));
+    expect(await within(card('Leg curl')).findByText(/Première fois sur cet exercice/)).toBeInTheDocument();
+  });
+
+  it('valider une série lance le repos ; « Passer » le ferme', async () => {
+    const user = userEvent.setup();
+    renderAt('/');
+    await user.click(await screen.findByRole('button', { name: 'Démarrer Séance A' }));
+    const press = await screen.findByRole('region', { name: 'Presse à cuisses' });
+    await user.click(within(press).getByRole('button', { name: 'Valider la série 1' }));
+
+    const banner = await screen.findByRole('complementary', { name: 'Repos' });
+    expect(within(banner).getByRole('timer')).toHaveTextContent(/1:(30|29)/);
+    await user.click(within(banner).getByRole('button', { name: 'Ajouter 15 secondes' }));
+    expect(await within(banner).findByText(/1:(45|44)/)).toBeInTheDocument();
+
+    await user.click(within(banner).getByRole('button', { name: 'Passer le repos' }));
+    await waitFor(() => expect(screen.queryByRole('complementary', { name: 'Repos' })).not.toBeInTheDocument());
+  });
+
   it('pas de « Démarrer » pendant qu’une séance est en cours', async () => {
     await db.sessions.add({ id: 's', name: 'Séance A', startedAt: Date.now(), exercises: [] });
     renderAt('/');

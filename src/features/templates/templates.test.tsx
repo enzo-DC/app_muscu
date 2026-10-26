@@ -27,18 +27,25 @@ describe('modèles de séance', () => {
     expect(await screen.findByLabelText('Nom de la séance')).toHaveValue('Séance A');
     await user.click(screen.getByRole('button', { name: 'Créer et choisir les exercices' }));
 
-    for (const name of ['Presse à cuisses', 'Tirage vertical', 'Développé couché', 'Leg curl']) {
-      await user.click(await screen.findByRole('button', { name: new RegExp(name) }));
-    }
+    // Par zone : on ouvre une carte, on coche, on revient aux zones
+    const pick = async (zone: RegExp, names: string[]) => {
+      await user.click(await screen.findByRole('button', { name: zone }));
+      for (const name of names) await user.click(await screen.findByRole('button', { name: new RegExp(`^${name}`) }));
+      await user.click(screen.getByRole('button', { name: 'Toutes les zones' }));
+    };
+    await pick(/^Jambes/, ['Presse à cuisses', 'Leg curl']);
+    expect(await screen.findByRole('button', { name: /^Jambes, 6 exercices, 2 ajoutés$/ })).toBeInTheDocument();
+    await pick(/^Dos/, ['Tirage vertical']);
+    await pick(/^Pecs/, ['Développé couché']);
     await user.click(await screen.findByRole('button', { name: 'Terminé · 4 exercices' }));
 
     const list = await screen.findByRole('list', { name: 'Exercices de la séance' });
     const items = within(list).getAllByRole('listitem');
     expect(items.map((li) => li.textContent)).toEqual([
       expect.stringContaining('Presse à cuisses'),
+      expect.stringContaining('Leg curl'),
       expect.stringContaining('Tirage vertical'),
       expect.stringContaining('Développé couché'),
-      expect.stringContaining('Leg curl'),
     ]);
 
     const tpl = await db.templates.toCollection().first();

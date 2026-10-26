@@ -63,7 +63,12 @@ export function ConfirmDialog({
         e.preventDefault();
         onCancel();
       }}
+      // Toucher le fond (hors de la feuille) ferme, comme sur iOS
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onCancel();
+      }}
     >
+      <div className={styles.grabber} aria-hidden="true" />
       <h2 id={titleId} className={styles.title}>
         {title}
       </h2>

@@ -1,4 +1,4 @@
-import type { ExerciseKind, MuscleGroup } from '../db/schema';
+import type { Equipment, ExerciseKind, Level, MuscleGroup } from '../db/schema';
 
 /** Tous les textes de l'interface. Français, tutoiement, phrases courtes. */
 export const t = {
@@ -37,6 +37,18 @@ export const t = {
     validate: (n: number) => `Valider la série ${n}`,
     unvalidate: (n: number) => `Annuler la série ${n}`,
     editSet: (n: number) => `Modifier la série ${n}`,
+    rest: 'Repos',
+    restLeft: (time: string) => `Repos — ${time}`,
+    restDone: 'Repos terminé, c’est reparti !',
+    restLess: 'Enlever 15 secondes',
+    restMore: 'Ajouter 15 secondes',
+    restLessShort: '−15 s',
+    restMoreShort: '+15 s',
+    restSkip: 'Passer',
+    restSkipLabel: 'Passer le repos',
+    lastTime: 'Dernière fois',
+    lastTimeSet: (value: string) => `dernière fois : ${value}`,
+    firstTime: 'Première fois sur cet exercice : choisis une charge confortable.',
     justStarted: 'commencée à l’instant',
     weight: 'kg',
     reps: 'reps',
@@ -71,6 +83,17 @@ export const t = {
   history: {
     title: 'Historique',
     empty: 'Aucune séance terminée pour l’instant. Elles apparaîtront ici.',
+    thisWeek: 'Cette semaine',
+    lastWeek: 'La semaine dernière',
+    weekOf: (date: string) => `Semaine du ${date}`,
+    sessionCount: (n: number) => (n > 1 ? `${n} séances` : '1 séance'),
+    setCount: (n: number) => (n > 1 ? `${n} séries` : '1 série'),
+    detailTitle: 'Séance',
+    notFound: 'Cette séance n’existe plus.',
+    delete: 'Supprimer cette séance',
+    deleteTitle: 'Supprimer cette séance ?',
+    deleteMessage: 'Elle disparaîtra de ton historique et ne comptera plus pour « la dernière fois ».',
+    deleteConfirm: 'Supprimer',
   },
 
   exercises: {
@@ -95,7 +118,42 @@ export const t = {
     deleteMessage:
       'Il disparaîtra de ta liste. Si tu l’as déjà utilisé, tes séances passées restent intactes.',
     deleteConfirm: 'Supprimer',
+    count: (n: number) => (n > 1 ? `${n} exercices` : n === 1 ? '1 exercice' : 'Aucun exercice'),
+    resultCount: (n: number) => (n > 1 ? `${n} résultats` : n === 1 ? '1 résultat' : ''),
+    zoneLink: (zone: string, n: number) => `${zone}, ${n} exercice${n > 1 ? 's' : ''}`,
+    addInZone: '+ Nouvel exercice dans cette zone',
+    allZones: 'Toutes les zones',
+    addedInZone: (n: number) => (n > 1 ? `${n} ajoutés` : '1 ajouté'),
+    equipmentFilter: 'Matériel',
+    allEquipment: 'Tout',
+    noneForFilter: 'Aucun exercice avec ce matériel.',
+    photoStart: 'Position de départ',
+    photoEnd: 'Position d’arrivée',
+    photoAlt: (name: string, step: string) => `${name} : ${step.toLowerCase()}`,
+    musclesTitle: 'Muscles travaillés',
+    musclesLabel: (primary: string, secondary: string) =>
+      secondary ? `Muscles travaillés : ${primary}. Secondaires : ${secondary}.` : `Muscles travaillés : ${primary}.`,
+    primary: 'Principal',
+    secondary: 'Secondaires',
+    howTo: 'Comment faire',
+    edit: 'Modifier l’exercice',
+    source: 'Photos et consignes : free-exercise-db (domaine public), consignes traduites et simplifiées.',
   },
+
+  equipment: {
+    machine: 'Machine',
+    poulie: 'Poulie',
+    halteres: 'Haltères',
+    barre: 'Barre',
+    barre_ez: 'Barre EZ',
+    poids_du_corps: 'Poids du corps',
+  } satisfies Record<Equipment, string>,
+
+  levels: {
+    debutant: 'Débutant',
+    intermediaire: 'Intermédiaire',
+    avance: 'Avancé',
+  } satisfies Record<Level, string>,
 
   kinds: {
     charge: 'Avec charge',
@@ -105,6 +163,26 @@ export const t = {
 
   settings: {
     title: 'Réglages',
+    restLabel: 'Temps de repos entre deux séries',
+    restHint: 'Le minuteur démarre tout seul quand tu valides une série.',
+    restLess: 'Moins de repos',
+    restMore: 'Plus de repos',
+    stepLabel: 'Pas des boutons − / + pour la charge',
+    stepHint: 'Regarde les plus petits disques de ta salle (souvent 1,25 ou 2,5 kg).',
+    vibrateLabel: 'Vibrer à la fin du repos',
+    vibrateHint: 'Ne marche pas sur iPhone : le navigateur ne le permet pas.',
+    backupTitle: 'Sauvegarde',
+    backupHint:
+      'Tes données restent sur ce téléphone. Exporte-les de temps en temps : si tu changes de téléphone ou de navigateur, tu les retrouves en important le fichier.',
+    export: 'Exporter mes données',
+    import: 'Importer une sauvegarde',
+    exported: 'Sauvegarde prête.',
+    importTitle: 'Remplacer tes données ?',
+    importMessage: (date: string) => `Sauvegarde du ${date}. Toutes tes données actuelles seront remplacées par celles-ci.`,
+    importConfirm: 'Importer et remplacer',
+    imported: 'Sauvegarde importée : tout est revenu.',
+    importFailed: 'Import impossible.',
+    exportFailed: 'Export impossible. Réessaie.',
   },
 
   templates: {

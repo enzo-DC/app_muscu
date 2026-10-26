@@ -20,6 +20,7 @@ import {
   renameTemplate,
   setTargetSets,
 } from '../../db/templates';
+import { spring } from '../../lib/motion';
 import { t } from '../../lib/strings';
 import styles from './Template.module.css';
 
@@ -89,7 +90,7 @@ function TemplateEditor({ template, exercisesById }: EditorProps) {
                 const exercise = exercisesById.get(item.exerciseId);
                 const exName = exercise?.name ?? '?';
                 return (
-                  <motion.li key={item.exerciseId} layout="position" className={styles.item}>
+                  <motion.li key={item.exerciseId} layout="position" transition={spring.smooth} className={styles.item}>
                     <span className={styles.index}>{index + 1}</span>
                     <span className={styles.name}>
                       {exName} {exercise?.archived && <span className={styles.archived}>{t.templates.archived}</span>}

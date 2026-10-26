@@ -5,7 +5,7 @@ import { ChoiceGroup } from '../../components/ChoiceGroup';
 import fieldStyles from '../../components/Field.module.css';
 import { Screen } from '../../components/Screen';
 import { addExercise } from '../../db/exercises';
-import type { ExerciseKind, MuscleGroup } from '../../db/schema';
+import { MUSCLE_GROUPS, type ExerciseKind, type MuscleGroup } from '../../db/schema';
 import { t } from '../../lib/strings';
 import styles from './ExerciseForm.module.css';
 import { GROUP_OPTIONS, KIND_OPTIONS } from './options';
@@ -14,7 +14,11 @@ export function ExerciseNewScreen() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const [name, setName] = useState(params.get('nom') ?? '');
-  const [group, setGroup] = useState<MuscleGroup>();
+  // Zone pré-choisie quand on arrive depuis l'écran d'une zone
+  const zone = params.get('zone');
+  const [group, setGroup] = useState<MuscleGroup | undefined>(
+    (MUSCLE_GROUPS as readonly string[]).includes(zone ?? '') ? (zone as MuscleGroup) : undefined,
+  );
   const [kind, setKind] = useState<ExerciseKind>('charge');
   const [note, setNote] = useState('');
 
@@ -24,7 +28,8 @@ export function ExerciseNewScreen() {
     e.preventDefault();
     if (!canSubmit) return;
     await addExercise({ name, group, kind, note });
-    navigate('/exercices', { replace: true });
+    // On montre l'exercice ajouté, dans sa zone
+    navigate(`/exercices/zone/${group}`, { replace: true });
   }
 
   return (

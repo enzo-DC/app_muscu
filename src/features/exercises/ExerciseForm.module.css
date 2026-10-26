@@ -10,11 +10,8 @@
 
 .dangerZone {
   margin-top: var(--s5);
-  padding-top: var(--s5);
-  border-top: 1px solid var(--rule);
 }
 
 .deleteButton {
-  border-color: var(--danger);
   color: var(--danger);
 }

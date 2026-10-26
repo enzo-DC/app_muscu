@@ -12,29 +12,59 @@
   font-size: var(--fs-sm);
 }
 
+/* Champs « à la iOS » : surface claire arrondie, sans bordure, anneau d'encre au focus */
 .input,
 .textarea {
   width: 100%;
-  min-height: var(--tap);
-  padding: var(--s3);
-  border: 1px solid var(--ink-soft);
-  border-radius: var(--radius);
+  min-height: 50px;
+  padding: var(--s3) var(--s4);
+  border: 0;
+  border-radius: 12px;
   background: var(--paper-raised);
+  box-shadow: inset 0 0 0 1px var(--hairline);
   font-size: var(--fs-md);
+  transition: box-shadow var(--dur) var(--ease-out);
 }
 
 .textarea {
-  min-height: 96px;
+  min-height: 104px;
   resize: vertical;
   line-height: 1.4;
 }
 
 .input:focus-visible,
 .textarea:focus-visible {
-  outline-offset: 0;
+  outline: 0;
+  box-shadow: inset 0 0 0 2px var(--ink);
 }
 
 .input::placeholder,
 .textarea::placeholder {
   color: var(--ink-soft);
+}
+
+/* Champ de recherche : gris, loupe à gauche */
+.search {
+  position: relative;
+}
+
+.search .input {
+  min-height: 44px;
+  padding-left: 40px;
+  background: var(--fill);
+  box-shadow: none;
+}
+
+.search .input:focus-visible {
+  background: var(--paper-raised);
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ink-soft);
+  pointer-events: none;
 }

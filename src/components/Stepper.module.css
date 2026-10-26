@@ -9,19 +9,22 @@
   height: var(--tap);
   display: grid;
   place-items: center;
-  border: 1px solid var(--ink-soft);
-  border-radius: var(--radius);
-  background: var(--paper-raised);
+  border: 0;
+  border-radius: 50%;
+  background: var(--fill);
+  color: var(--ink);
   font-family: var(--font-num);
   font-size: var(--fs-xl);
   font-weight: 500;
   line-height: 1;
-  transition: transform var(--dur) var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 380ms var(--ease-spring), background-color 120ms var(--ease-out);
 }
 
 .button:active:not(:disabled) {
-  transform: scale(0.94);
-  background: var(--rule);
+  transform: scale(0.88);
+  background: var(--fill-pressed);
+  transition-duration: 80ms;
 }
 
 .button:disabled {
