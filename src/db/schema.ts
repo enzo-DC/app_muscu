@@ -96,6 +96,8 @@ export interface Settings {
   defaultRestSeconds: number;
   weightStep: number;
   vibrate: boolean;
+  /** Son à la fin du repos (absent dans les anciennes bases : considéré comme activé). */
+  sound?: boolean;
   /** Version de la bibliothèque d'exercices déjà importée (voir library.ts). */
   libraryVersion?: number;
 }
@@ -105,6 +107,7 @@ export const DEFAULT_SETTINGS: Settings = {
   defaultRestSeconds: 90,
   weightStep: 2.5,
   vibrate: true,
+  sound: true,
 };
 
 export type CarnetDB = Dexie & {

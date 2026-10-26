@@ -121,9 +121,4 @@
   place-items: center;
   border-radius: 50%;
   color: var(--ink);
-  transition: background-color 120ms var(--ease-out);
-}
-
-.settingsLink:active {
-  background: var(--fill-pressed);
 }

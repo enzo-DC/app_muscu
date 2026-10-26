@@ -31,6 +31,8 @@ export default defineConfig({
         // Tout le site est mis en cache : l'app marche en mode avion à la salle
         // Photos des exercices comprises (~14 Mo, téléchargées une fois à l'installation)
         globPatterns: ['**/*.{js,css,html,woff2,png,svg,webp}'],
+        // Écrans de lancement : utilisés par iOS seulement au démarrage, inutile de les mettre en cache
+        globIgnores: ['splash/**'],
         navigateFallback: 'index.html',
       },
     }),

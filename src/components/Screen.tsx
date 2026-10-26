@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react';
-import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { Link } from 'react-router';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { Link, useNavigate } from 'react-router';
+import { useEdgeSwipeBack } from '../lib/edgeSwipe';
 import { spring } from '../lib/motion';
 import { t } from '../lib/strings';
 import { Icon } from './Icon';
@@ -23,7 +24,12 @@ type Props = {
  */
 export function Screen({ title, backTo, action, background, children }: Props) {
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const screenRef = useRef<HTMLDivElement>(null);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  // Retour par balayage depuis le bord gauche (app installée)
+  const goBack = useMemo(() => (backTo ? () => navigate(backTo) : undefined), [backTo, navigate]);
+  useEdgeSwipeBack(screenRef, goBack);
 
   useEffect(() => {
     const el = titleRef.current;
@@ -37,16 +43,13 @@ export function Screen({ title, backTo, action, background, children }: Props) {
   }, []);
 
   return (
-    <>
+    <div ref={screenRef}>
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
         <div className={styles.bar}>
           <div className={styles.side}>
             {backTo && (
-              <Link to={backTo} className={styles.back} aria-label={t.back}>
+              <Link to={backTo} className={`${styles.back} glass glass-press`} aria-label={t.back}>
                 <Icon name="back" size={22} />
-                <span className={styles.backLabel} aria-hidden="true">
-                  {t.back}
-                </span>
               </Link>
             )}
           </div>
@@ -76,6 +79,6 @@ export function Screen({ title, backTo, action, background, children }: Props) {
           {children}
         </main>
       </div>
-    </>
+    </div>
   );
 }

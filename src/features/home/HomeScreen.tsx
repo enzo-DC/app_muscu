@@ -31,7 +31,7 @@ export function HomeScreen() {
     <Screen
       title={t.home.title}
       action={
-        <Link to="/reglages" className={styles.settingsLink} aria-label={t.home.settings}>
+        <Link to="/reglages" className={`${styles.settingsLink} glass glass-press`} aria-label={t.home.settings}>
           <Icon name="gear" />
         </Link>
       }

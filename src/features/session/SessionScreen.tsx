@@ -2,7 +2,7 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { useReducedMotion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import { Button, ButtonLink } from '../../components/Button';
+import { ButtonLink } from '../../components/Button';
 import { ConfirmDialog } from '../../components/ConfirmDialog';
 import { Screen } from '../../components/Screen';
 import { getExercisesById } from '../../db/exercises';
@@ -114,13 +114,13 @@ function ActiveSession({ session, exercisesById, settings }: ActiveProps) {
       backTo="/"
       background="grid"
       action={
-        <div className={styles.headerActions}>
+        <div className={`${styles.headerActions} glass`}>
           <span className={styles.clock} role="timer" aria-label={t.session.elapsed}>
             {formatTimer(summary.durationSec)}
           </span>
-          <Button className={styles.finishButton} onClick={() => setDialog('finish')}>
+          <button type="button" className={`${styles.finishButton} glass-press`} onClick={() => setDialog('finish')}>
             {t.session.finish}
-          </Button>
+          </button>
         </div>
       }
     >
@@ -158,7 +158,7 @@ function ActiveSession({ session, exercisesById, settings }: ActiveProps) {
 
       {/* Place pour que le bandeau de repos ne cache pas le bas de la page */}
       {session.rest && <div className={styles.restSpacer} aria-hidden="true" />}
-      <RestTimer session={session} vibrateEnabled={settings.vibrate} />
+      <RestTimer session={session} vibrateEnabled={settings.vibrate} soundEnabled={settings.sound !== false} />
 
       <ConfirmDialog
         open={dialog === 'finish'}

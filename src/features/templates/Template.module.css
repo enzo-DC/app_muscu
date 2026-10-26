@@ -10,9 +10,7 @@
 
 .sectionTitle {
   padding: 0 var(--s3);
-  font-size: var(--fs-md);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-size: var(--fs-lg);
   color: var(--ink-soft);
 }
 
@@ -160,13 +158,10 @@
 
 
 
-/* Bouton « Terminé » flottant au-dessus de la barre d'onglets, sur du verre */
+/* Bouton « Terminé » flottant au-dessus de la barre d'onglets */
 .doneBar {
   position: sticky;
-  bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
-  margin: var(--s5) calc(-1 * var(--s4)) 0;
-  padding: var(--s3) var(--s4);
-  background: var(--glass);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
+  bottom: var(--tabbar-space);
+  margin: var(--s5) 0 0;
+  padding: var(--s3) 0;
 }

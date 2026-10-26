@@ -2,16 +2,14 @@
   margin-top: var(--s5);
 }
 
-/* En-tête de section façon iOS : petites capitales grises au-dessus du bloc */
+/* En-tête de section façon iOS 26 : capitalisation de titre, gris, au-dessus du bloc */
 .groupTitle {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   padding: 0 var(--s3) var(--s2);
-  font-size: var(--fs-md);
+  font-size: var(--fs-lg);
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
   color: var(--ink-soft);
 }
 

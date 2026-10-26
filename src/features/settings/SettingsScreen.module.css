@@ -64,7 +64,7 @@
   height: 28px;
   border-radius: 50%;
   background: #FFFFFF;
-  box-shadow: 0 2px 6px rgb(28 27 25 / 0.2), 0 0 0 0.5px var(--hairline);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.25), 0 0 0 0.5px var(--hairline);
   transition: transform 380ms var(--ease-spring);
 }
 

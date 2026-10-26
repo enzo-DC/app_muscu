@@ -20,16 +20,20 @@ function activeTab(pathname: string): string {
 
 const MotionLink = motion.create(Link);
 
+/** Barre d'onglets Liquid Glass : capsule flottante, pastille qui glisse sous l'onglet actif. */
 export function TabBar() {
   const { pathname } = useLocation();
   const active = activeTab(pathname);
   return (
-    <nav className={styles.bar} aria-label="Navigation principale">
+    <nav className={`${styles.bar} glass`} aria-label="Navigation principale">
       <ul className={styles.list}>
         {TABS.map((tab) => {
           const isActive = tab.to === active;
           return (
-            <li key={tab.to}>
+            <li key={tab.to} className={styles.item}>
+              {isActive && (
+                <motion.span layoutId="tab-pill" className={styles.pill} transition={spring.smooth} aria-hidden="true" />
+              )}
               <MotionLink
                 to={tab.to}
                 className={`${styles.tab} ${isActive ? styles.active : ''}`}
@@ -42,7 +46,7 @@ export function TabBar() {
                   animate={{ scale: isActive ? 1.08 : 1 }}
                   transition={spring.bouncy}
                 >
-                  <Icon name={tab.icon} size={26} />
+                  <Icon name={tab.icon} size={24} />
                 </motion.span>
                 {tab.label}
               </MotionLink>

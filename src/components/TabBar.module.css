@@ -1,22 +1,37 @@
-/* Barre d'onglets en verre, comme sur iOS */
+/* Capsule flottante, détachée des bords (Liquid Glass d'iOS 26) */
 .bar {
   position: fixed;
-  inset: auto 0 0 0;
+  left: var(--s4);
+  right: var(--s4);
+  bottom: calc(env(safe-area-inset-bottom) + var(--tabbar-gap));
   z-index: 20;
-  padding-bottom: env(safe-area-inset-bottom);
-  background: var(--glass-raised);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  box-shadow: 0 -0.5px 0 var(--hairline);
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 4px;
+  border-radius: 999px;
 }
 
 .list {
-  max-width: var(--content-max);
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+}
+
+.item {
+  position: relative;
+}
+
+/* Pastille de verre sous l'onglet actif : elle glisse d'un onglet à l'autre */
+.pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--tab-pill);
+  box-shadow:
+    inset 0 1px 0.5px var(--glass-spec),
+    inset 0 0 0 0.5px var(--glass-edge);
 }
 
 .tab {
@@ -26,10 +41,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 1px;
+  border-radius: 999px;
   color: var(--ink-soft);
   text-decoration: none;
-  font-size: var(--fs-xs);
+  font-size: min(var(--fs-xs), 15px); /* plafonné : la capsule garde sa hauteur */
   font-weight: 700;
   -webkit-tap-highlight-color: transparent;
 }

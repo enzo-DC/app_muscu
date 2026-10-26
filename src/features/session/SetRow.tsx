@@ -22,23 +22,28 @@ type Props = {
 };
 
 export function SetRow({ set, previous, number, kind, weightStep, expanded, onExpand, onChange, onToggle }: Props) {
+  // La case ✓ est un vrai interrupteur iOS (<input type="checkbox" switch>), invisible, posé sur le dessin :
+  // quand le doigt le touche, Safari joue la vibration native de l'iPhone (seul retour haptique possible sur le web).
   const check = (
-    <button
-      type="button"
-      className={`${styles.check} ${expanded ? styles.checkLarge : ''}`}
-      aria-label={set.done ? t.session.unvalidate(number) : t.session.validate(number)}
-      aria-pressed={set.done}
-      onClick={onToggle}
-    >
+    <label className={`${styles.check} ${expanded ? styles.checkLarge : ''}`}>
+      <input
+        ref={(el) => el?.setAttribute('switch', '')}
+        type="checkbox"
+        className={styles.checkInput}
+        aria-label={set.done ? t.session.unvalidate(number) : t.session.validate(number)}
+        checked={set.done}
+        onChange={onToggle}
+      />
       {/* Petit « pop » à ressort quand la série est validée */}
       <motion.span
         className={styles.checkIcon}
+        aria-hidden="true"
         animate={set.done ? { scale: [0.5, 1.2, 1] } : { scale: 1 }}
         transition={spring.bouncy}
       >
         <Icon name="check" size={expanded ? 36 : 28} />
       </motion.span>
-    </button>
+    </label>
   );
 
   return (

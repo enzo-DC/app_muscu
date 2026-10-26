@@ -4,27 +4,30 @@ import type { Session } from '../../db/schema';
 import { adjustRest, clearRest } from '../../db/sessions';
 import { formatTimer } from '../../lib/format';
 import { spring } from '../../lib/motion';
-import { REST_ADJUST_SEC, restState, vibrate } from '../../lib/rest';
+import { playRestEndSound, vibrate } from '../../lib/feedback';
+import { REST_ADJUST_SEC, restState } from '../../lib/rest';
 import { t } from '../../lib/strings';
 import { useNow } from '../../lib/useNow';
 import styles from './RestTimer.module.css';
 
-type Props = { session: Session; vibrateEnabled: boolean };
+type Props = { session: Session; vibrateEnabled: boolean; soundEnabled: boolean };
 
 /** Bandeau du minuteur de repos, en bas de l'écran de séance. */
-export function RestTimer({ session, vibrateEnabled }: Props) {
+export function RestTimer({ session, vibrateEnabled, soundEnabled }: Props) {
   const now = useNow(250);
   const { rest } = session;
   const state = restState(rest, now);
   const notifiedFor = useRef<number | null>(null);
 
-  // Fin du repos : une vibration, une seule fois par repos
+  // Fin du repos : vibration (Android) et/ou son (iPhone compris), une seule fois par repos
   useEffect(() => {
     if (state.phase !== 'done' || !rest || notifiedFor.current === rest.endsAt) return;
     notifiedFor.current = rest.endsAt;
     // Pas de vibration si on rouvre l'app longtemps après la fin
-    if (vibrateEnabled && Date.now() - rest.endsAt < 3000) vibrate([200, 100, 200]);
-  }, [state.phase, rest, vibrateEnabled]);
+    if (Date.now() - rest.endsAt >= 3000) return;
+    if (vibrateEnabled) vibrate([200, 100, 200]);
+    if (soundEnabled) playRestEndSound();
+  }, [state.phase, rest, vibrateEnabled, soundEnabled]);
 
   // Le bandeau a disparu : on efface le repos de la séance
   useEffect(() => {
@@ -43,7 +46,7 @@ export function RestTimer({ session, vibrateEnabled }: Props) {
         {state.phase !== 'gone' && (
           <motion.aside
             key="rest"
-            className={`${styles.banner} ${done ? styles.done : ''}`}
+            className={`${styles.banner} glass-dark ${done ? styles.done : ''}`}
             aria-label={t.session.rest}
             initial={{ y: 120, scale: 0.9, opacity: 0 }}
             animate={{ y: 0, scale: 1, opacity: 1 }}

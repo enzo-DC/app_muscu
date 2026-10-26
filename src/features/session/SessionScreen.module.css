@@ -1,8 +1,11 @@
 /* En-tête */
+/* Chrono + Terminer partagent une même capsule de verre */
 .headerActions {
   display: flex;
   align-items: center;
-  gap: var(--s2);
+  gap: var(--s1);
+  padding: 0 0 0 var(--s4);
+  border-radius: 999px;
 }
 
 .clock {
@@ -13,11 +16,16 @@
   color: var(--ink-soft);
 }
 
-/* Bouton de barre en gélule, comme les boutons de barre d'iOS */
 .finishButton {
   min-height: var(--tap);
   padding: 0 var(--s4);
+  border: 0;
   border-radius: 999px;
+  background: transparent;
+  color: var(--accent-text);
+  font-weight: 700;
+  font-size: var(--fs-md);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .none {
@@ -34,7 +42,7 @@
   scroll-margin-top: 72px;
   border-radius: var(--radius-lg);
   background: var(--paper-raised);
-  box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 3px rgb(28 27 25 / 0.06);
+  box-shadow: 0 0 0 0.5px var(--hairline), var(--shadow-card);
   overflow: hidden;
   transition: box-shadow 300ms var(--ease-out);
 }
@@ -232,6 +240,7 @@
 }
 
 .check {
+  position: relative;
   flex: none;
   width: var(--tap);
   height: var(--tap);
@@ -252,6 +261,26 @@
 
 .checkIcon {
   display: grid;
+  pointer-events: none;
+}
+
+/* Le vrai interrupteur, invisible, couvre toute la case : c'est lui que le doigt touche */
+.checkInput {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Focus clavier visible sur la case dessinée */
+.check:has(.checkInput:focus-visible) {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
 }
 
 .checkLarge {
@@ -274,7 +303,7 @@
 
 /* Série faite : la case se remplit, la ligne s'atténue */
 .setDone {
-  background: rgb(201 74 34 / 0.05);
+  background: var(--done-tint);
 }
 
 .setDone .setValues,

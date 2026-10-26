@@ -57,7 +57,7 @@ export function TemplatePickerScreen() {
         />
       </div>
       <div className={styles.doneBar}>
-        <Button variant="primary" block onClick={() => navigate(editorPath, { replace: true })}>
+        <Button variant="primary" block className="glass-tint glass-press" onClick={() => navigate(editorPath, { replace: true })}>
           {t.templates.done(picked.size)}
         </Button>
       </div>

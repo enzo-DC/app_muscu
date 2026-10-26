@@ -35,15 +35,17 @@
   cursor: not-allowed;
 }
 
+/* Le champ s'élargit avec ses chiffres ; plafonné pour que la ligne tienne aux très grandes tailles de texte */
 .field {
-  width: 44px;
+  font-size: min(var(--fs-num), 46px);
+  width: 1.25em;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .wide {
-  width: 72px;
+  width: 2.05em;
 }
 
 /* Le champ et les chiffres animés sont superposés */
@@ -63,7 +65,7 @@
   text-align: center;
   font-family: var(--font-num);
   font-variant-numeric: tabular-nums;
-  font-size: var(--fs-num);
+  font-size: 1em;
   font-weight: 600;
   line-height: 1.05;
 }
@@ -95,7 +97,7 @@
 .rollValue {
   font-family: var(--font-num);
   font-variant-numeric: tabular-nums;
-  font-size: var(--fs-num);
+  font-size: 1em;
   font-weight: 600;
   line-height: 1.05;
 }

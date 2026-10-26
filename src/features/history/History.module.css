@@ -13,9 +13,7 @@
   justify-content: space-between;
   align-items: baseline;
   padding: 0 var(--s3) var(--s2);
-  font-size: var(--fs-md);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-size: var(--fs-lg);
   color: var(--ink-soft);
 }
 

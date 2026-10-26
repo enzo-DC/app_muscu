@@ -32,7 +32,7 @@
   border: 0;
   border-radius: var(--radius-lg);
   background: var(--paper-raised);
-  box-shadow: 0 0 0 0.5px var(--hairline), 0 1px 3px rgb(28 27 25 / 0.06);
+  box-shadow: 0 0 0 0.5px var(--hairline), var(--shadow-card);
   color: var(--ink);
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
@@ -248,8 +248,6 @@
 
 .sheetTitle {
   font-size: var(--fs-lg);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
 .muscleRow {
@@ -298,11 +296,11 @@
 }
 
 .swatchPrimary {
-  background: var(--accent);
+  background: var(--muscle-primary);
 }
 
 .swatchSecondary {
-  background: #E8A88F;
+  background: var(--muscle-secondary);
 }
 
 .steps {

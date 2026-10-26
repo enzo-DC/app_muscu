@@ -47,14 +47,14 @@ describe('séance en cours', () => {
     // Saisie de la charge au clavier, puis validation
     const weight = within(press).getByRole('textbox', { name: 'Charge de la série 1, en kilos' });
     await user.type(weight, '37,5');
-    await user.click(within(press).getByRole('button', { name: 'Valider la série 1' }));
+    await user.click(within(press).getByRole('checkbox', { name: 'Valider la série 1' }));
 
     // Série 2 pré-remplie avec les mêmes valeurs : 1 tap suffit
     await waitFor(() =>
       expect(within(press).getByRole('textbox', { name: 'Charge de la série 2, en kilos' })).toHaveValue('37,5'),
     );
     expect(within(press).getByText('1/2 séries')).toBeInTheDocument();
-    await user.click(within(press).getByRole('button', { name: 'Valider la série 2' }));
+    await user.click(within(press).getByRole('checkbox', { name: 'Valider la série 2' }));
 
     // Exercice fini → le suivant se déplie tout seul
     expect(
@@ -84,7 +84,7 @@ describe('séance en cours', () => {
     const first = renderAt('/');
     await user.click(await screen.findByRole('button', { name: 'Démarrer Séance A' }));
     const press = await screen.findByRole('region', { name: 'Presse à cuisses' });
-    await user.click(within(press).getByRole('button', { name: 'Valider la série 1' }));
+    await user.click(within(press).getByRole('checkbox', { name: 'Valider la série 1' }));
     await within(press).findByText('1/2 séries');
     first.unmount();
 
@@ -162,7 +162,7 @@ describe('séance en cours', () => {
     renderAt('/');
     await user.click(await screen.findByRole('button', { name: 'Démarrer Séance A' }));
     const press = await screen.findByRole('region', { name: 'Presse à cuisses' });
-    await user.click(within(press).getByRole('button', { name: 'Valider la série 1' }));
+    await user.click(within(press).getByRole('checkbox', { name: 'Valider la série 1' }));
 
     const banner = await screen.findByRole('complementary', { name: 'Repos' });
     expect(within(banner).getByRole('timer')).toHaveTextContent(/1:(30|29)/);

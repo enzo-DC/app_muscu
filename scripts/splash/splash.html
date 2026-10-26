@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "Barlow Condensed"; font-weight: 700; src: url("../../public/fonts/barlow-condensed-700.woff2") format("woff2"); }
+  html, body { margin: 0; height: 100%; }
+  body { display: grid; place-items: center; background: #F5F1EA; color: #1C1B19; }
+  body.dark { background: #121110; color: #F3EFE8; }
+  .mark { display: grid; justify-items: center; gap: 18px; transform: translateY(-4%); }
+  svg { width: 132px; height: 132px; }
+  .name { font-family: "Barlow Condensed"; font-weight: 700; font-size: 44px; letter-spacing: 0.02em; }
+</style>
+</head>
+<body>
+  <div class="mark">
+    <svg viewBox="0 0 512 512" aria-hidden="true">
+      <g stroke="currentColor" stroke-width="34" stroke-linecap="round">
+        <path d="M168 156V356M224 156V356M280 156V356M336 156V356"/>
+      </g>
+      <path d="M132 326L372 186" stroke="#C94A22" stroke-width="34" stroke-linecap="round"/>
+    </svg>
+    <div class="name">Fonte</div>
+  </div>
+  <script>
+    if (location.hash === '#dark') document.body.classList.add('dark');
+  </script>
+</body>
+</html>

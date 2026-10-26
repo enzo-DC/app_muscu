@@ -6,7 +6,7 @@ import type { Exercise, SessionExercise } from '../../db/schema';
 import { addSet, completeSet, getLastPerformance, uncompleteSet, updateSet } from '../../db/sessions';
 import { formatSet, formatShortDate } from '../../lib/format';
 import { spring } from '../../lib/motion';
-import { vibrate } from '../../lib/rest';
+import { unlockAudio, vibrate } from '../../lib/feedback';
 import { setsProgress } from '../../lib/stats';
 import { t } from '../../lib/strings';
 import styles from './SessionScreen.module.css';
@@ -53,6 +53,8 @@ export const ExerciseCard = forwardRef<HTMLElement, Props>(function ExerciseCard
       return;
     }
     setEditing(null); // on passe à la série suivante
+    // Le geste du doigt autorise le son de fin de repos sur iPhone
+    unlockAudio();
     if (haptics) vibrate([12]);
     void completeSet(sessionId, index, setIndex, restSeconds);
     onSetCompleted(progress.done + 1 === progress.total);

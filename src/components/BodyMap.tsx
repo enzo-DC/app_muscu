@@ -2,13 +2,11 @@ import { createBodyHighlighter } from 'body-highlighter';
 import { useEffect, useRef } from 'react';
 import type { Muscle } from '../db/schema';
 import type { BodyView } from '../lib/muscles';
+import { cssToken, useColorScheme } from '../lib/useColorScheme';
 import styles from './BodyMap.module.css';
 
 // Comme les autocollants des machines : corps gris, muscles travaillés en couleur.
-// body-highlighter attend des couleurs en dur (pas de variables CSS) : mêmes valeurs que tokens.css.
-const BODY = '#CFC9BF';
-const SECONDARY = '#E8A88F'; // --accent éclairci
-const PRIMARY = '#C94A22'; // --accent
+// body-highlighter attend des couleurs : on lit les tokens --muscle-* (clair ou sombre).
 
 type Props = {
   primary: readonly Muscle[];
@@ -24,6 +22,7 @@ export function BodyMap({ primary, secondary = [], view, label, className }: Pro
   const ref = useRef<HTMLDivElement>(null);
   const primaryKey = primary.join();
   const secondaryKey = secondary.join();
+  const scheme = useColorScheme();
 
   useEffect(() => {
     const container = ref.current;
@@ -31,8 +30,8 @@ export function BodyMap({ primary, secondary = [], view, label, className }: Pro
     const instance = createBodyHighlighter({
       container,
       type: view,
-      bodyColor: BODY,
-      highlightedColors: [SECONDARY, PRIMARY],
+      bodyColor: cssToken('--muscle-body', '#CFC9BF'),
+      highlightedColors: [cssToken('--muscle-secondary', '#E8A88F'), cssToken('--muscle-primary', '#C94A22')],
       // Fréquence 1 → 1re couleur, 2 et plus → 2e couleur
       data: [
         { name: 'secondaire', muscles: secondaryKey ? secondaryKey.split(',') : [], frequency: 1 },
@@ -41,7 +40,7 @@ export function BodyMap({ primary, secondary = [], view, label, className }: Pro
       svgStyle: { width: '100%', height: '100%' },
     });
     return () => instance.destroy();
-  }, [view, primaryKey, secondaryKey]);
+  }, [view, primaryKey, secondaryKey, scheme]);
 
   return (
     <div

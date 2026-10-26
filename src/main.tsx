@@ -5,6 +5,7 @@ import { App } from './App';
 import { ensureLibrary } from './db/library';
 import './styles/tokens.css';
 import './styles/global.css';
+import './styles/glass.css';
 
 // Demande au navigateur de ne jamais effacer nos données pour faire de la place
 void navigator.storage?.persist?.().catch(() => undefined);

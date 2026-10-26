@@ -1,19 +1,32 @@
-/* Barre du haut en verre : le contenu glisse dessous, flouté */
+/*
+ * Barre du haut iOS 26 : pas de bandeau plein. Les boutons sont des pastilles de verre
+ * qui flottent au-dessus du contenu ; quand on fait défiler, le contenu s'estompe
+ * dans un fondu flou sous la barre (« scroll edge effect » d'Apple).
+ */
 .header {
   position: sticky;
   top: 0;
   z-index: 10;
   padding-top: env(safe-area-inset-top);
-  background: var(--glass);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  box-shadow: 0 0.5px 0 transparent;
-  transition: box-shadow var(--dur) var(--ease-out);
 }
 
-/* Le filet n'apparaît qu'une fois qu'on a fait défiler, comme sur iOS */
-.scrolled {
-  box-shadow: 0 0.5px 0 var(--hairline);
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 -20px;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--paper) 35%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  opacity: 0;
+  transition: opacity 250ms var(--ease-out);
+}
+
+.scrolled::before {
+  opacity: 1;
 }
 
 .bar {
@@ -21,7 +34,8 @@
   margin: 0 auto;
   min-height: var(--navbar-h);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  /* Les boutons gardent leur taille ; c'est le petit titre au centre qui cède la place */
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: var(--s2);
   padding: 0 var(--s2);
@@ -38,26 +52,21 @@
   grid-column: 3;
 }
 
+/* Bouton retour : pastille ronde en verre avec un chevron, comme iOS 26 */
 .back {
-  min-height: var(--tap);
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  padding: 0 var(--s2) 0 0;
-  border-radius: var(--radius);
+  width: var(--tap);
+  height: var(--tap);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
   color: var(--ink);
-  font-weight: 700;
   text-decoration: none;
-  transition: opacity var(--dur) var(--ease-out);
-}
-
-.back:active {
-  opacity: 0.5;
 }
 
 .compactTitle {
   grid-column: 2;
-  max-width: 52vw;
+  justify-self: center;
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -78,8 +87,8 @@
 .grid {
   min-height: calc(100dvh - var(--navbar-h));
   background-image:
-    linear-gradient(rgb(221 214 202 / 0.55) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(221 214 202 / 0.55) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 24px 24px;
   background-position: center top;
 }
@@ -87,23 +96,6 @@
 .content {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: 0 var(--s4) calc(var(--tabbar-h) + var(--s6) + env(safe-area-inset-bottom));
+  padding: 0 var(--s4) calc(var(--tabbar-space) + var(--s6));
 }
 
-/* Bouton rond « verre » pour la barre (réglages…) */
-.iconButton {
-  flex: none;
-  width: var(--tap);
-  height: var(--tap);
-  display: grid;
-  place-items: center;
-  border: 0;
-  border-radius: 50%;
-  background: transparent;
-  color: var(--ink);
-  text-decoration: none;
-}
-
-.iconButton:active {
-  background: var(--fill-pressed);
-}

@@ -22,11 +22,3 @@ export function restState(rest: RestTimer | undefined, now: number): RestState {
   return { phase: -left < REST_DONE_VISIBLE_MS ? 'done' : 'gone', remainingSec: 0, progress: 1 };
 }
 
-/** Vibre si le téléphone le permet (pas de vibration sur iPhone / ordinateur : on ignore). */
-export function vibrate(pattern: number[]): void {
-  try {
-    navigator.vibrate?.(pattern);
-  } catch {
-    // Non supporté : rien à faire
-  }
-}

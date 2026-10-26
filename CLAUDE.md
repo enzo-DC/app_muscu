@@ -193,8 +193,9 @@ C'est 80 % de l'usage, il doit être parfait.
 
 ### Finition Apple (décidée le 2026-10-26)
 L'app doit avoir la finition d'une app Apple, **en gardant l'ambiance carnet** (papier, encre, accent brique, Barlow Condensed pour les chiffres) :
-- **Verre** : barre du haut, barre d'onglets, feuilles de confirmation et capsule de repos en verre dépoli (`--glass*`, `--glass-blur` dans `tokens.css`), avec repli opaque si le navigateur ne gère pas le flou.
-- **Navigation iOS** : grand titre dans la page, petit titre centré dans la barre au défilement ; retour « ‹ Retour » ; l'écran plus profond arrive par la droite, le retour par la gauche.
+- **Liquid Glass (iOS 26)** : classes `glass` / `glass-dark` / `glass-tint` (+ `glass-press`) dans `src/styles/glass.css`. **Uniquement sur la couche de contrôles et de navigation** qui flotte au-dessus du contenu : capsule d'onglets flottante, boutons ronds de la barre du haut, feuilles décollées des bords, capsule de repos, bouton « Terminé » flottant. Jamais sur le contenu (cartes, listes). Repli opaque avec « Réduire la transparence », « Augmenter le contraste » ou sans flou.
+- **Navigation iOS** : grand titre dans la page ; pas de bandeau plein en haut, les boutons flottent et le contenu s'estompe dessous au défilement (effet de bord) avec le petit titre centré ; retour = pastille ronde « ‹ » ; l'écran plus profond arrive par la droite, le retour par la gauche.
+- **En-têtes de section** en capitalisation de titre (pas de majuscules partout), comme iOS 26.
 - **Listes groupées** façon Réglages iOS : blocs blancs arrondis (`--radius-lg`), séparateurs fins décalés.
 - **Boutons** : principal plein (accent), secondaires gris translucides (`--fill`), boutons ronds pour − / +, pastilles en gélule.
 - **Animations à ressort** (`src/lib/motion.ts`) : appui qui s'enfonce et rebondit, chiffres qui défilent, case ✓ qui « pop », feuilles qui montent du bas. Toujours désactivées par `prefers-reduced-motion`.

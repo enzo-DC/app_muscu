@@ -2,16 +2,11 @@
   position: fixed;
   left: var(--s3);
   right: var(--s3);
-  bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + var(--s2));
+  bottom: calc(var(--tabbar-space) + var(--s2));
   z-index: 15;
   max-width: calc(var(--content-max) - 2 * var(--s3));
   margin: 0 auto;
-  background: var(--glass-dark);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
-  color: var(--paper-raised);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-float);
+  border-radius: 30px;
   overflow: hidden;
 }
 
@@ -72,7 +67,7 @@
 }
 
 .button:focus-visible {
-  outline-color: var(--paper-raised);
+  outline-color: #FFFDF9;
 }
 
 /* Barre de progression linéaire, en bas du bandeau */
@@ -88,8 +83,9 @@
   transition: transform 250ms linear;
 }
 
-.done {
-  background: rgb(201 74 34 / 0.92);
+/* Fin du repos : la capsule se teinte en brique (deux classes pour passer devant .glass-dark) */
+.banner.done {
+  background: linear-gradient(180deg, rgb(214 88 48 / 0.94), rgb(201 74 34 / 0.88));
   color: var(--accent-ink);
 }
 

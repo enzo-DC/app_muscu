@@ -1,4 +1,6 @@
 :root {
+  color-scheme: light dark;
+
   /* Couleurs */
   --paper:        #F5F1EA;  /* fond */
   --paper-raised: #FFFDF9;  /* surfaces */
@@ -6,9 +8,43 @@
   --ink-soft:     #6B675F;  /* texte secondaire, « dernière fois » — 5:1 sur --paper */
   --rule:         #DDD6CA;  /* filets, bordures */
   --accent:       #C94A22;  /* orange brique : action principale, série validée — 4,7:1 avec --accent-ink */
+  --accent-pressed: #B4401C;
   --accent-ink:   #FFFFFF;
-  --ok:           #2F7D4F;  /* record / succès (V2) */
-  --danger:       #B3261E;
+  --accent-text:  #B4401C;  /* accent pour du TEXTE sur le fond : 5:1 sur --paper (AA) */
+  --ok:           #2F7D4F;  /* record / succès */
+  --danger:       #B3261E;  /* texte destructif */
+  --danger-fill:  #B3261E;  /* fond des boutons destructifs (texte blanc) */
+  --danger-pressed: #9A2019;
+
+  /* Surfaces et effets */
+  --hairline:     rgb(28 27 25 / 0.12);     /* filet 0,5 px */
+  --fill:         rgb(28 27 25 / 0.06);     /* fond des boutons secondaires (« gris » iOS) */
+  --fill-pressed: rgb(28 27 25 / 0.12);
+  --shadow-card:  0 1px 3px rgb(28 27 25 / 0.06);
+  --shadow-float: 0 8px 24px rgb(28 27 25 / 0.16), 0 1px 3px rgb(28 27 25 / 0.08);
+  --backdrop:     rgb(28 27 25 / 0.32);     /* voile derrière les feuilles */
+  --grid-line:    rgb(221 214 202 / 0.55);  /* quadrillage du carnet */
+  --done-tint:    rgb(201 74 34 / 0.05);    /* série validée */
+
+  /* Liquid Glass (voir glass.css) */
+  --glass-top:      rgb(255 253 249 / 0.66);
+  --glass-bottom:   rgb(255 253 249 / 0.42);
+  --glass-spec:     rgb(255 255 255 / 0.95);  /* reflet en haut */
+  --glass-refract:  rgb(255 255 255 / 0.45);  /* reflet en bas */
+  --glass-edge:     rgb(255 255 255 / 0.6);   /* bord lumineux */
+  --glass-outline:  rgb(28 27 25 / 0.1);
+  --glass-drop:     rgb(28 27 25 / 0.28);
+  --glass-glow:     rgb(255 255 255 / 0.5);
+  --glass-dark-top:    rgb(52 49 45 / 0.78);
+  --glass-dark-bottom: rgb(28 27 25 / 0.68);
+  --sheet-top:      rgb(255 253 249 / 0.9);
+  --sheet-bottom:   rgb(255 253 249 / 0.8);
+  --tab-pill:       rgb(28 27 25 / 0.08);
+
+  /* Schéma des muscles (body-highlighter attend des couleurs, lues par BodyMap) */
+  --muscle-body:      #CFC9BF;
+  --muscle-secondary: #E8A88F;
+  --muscle-primary:   #C94A22;
 
   /* Typo */
   --font-text: "Atkinson Hyperlegible", sans-serif;  /* très lisible */
@@ -25,19 +61,14 @@
   --radius-xl: 22px;  /* feuilles, capsule de repos */
   --tap: 48px;  /* taille minimale d'une zone tactile */
 
-  /* Verre (style Apple) : surfaces translucides floutées */
-  --glass:        rgb(245 241 234 / 0.72);  /* --paper translucide */
-  --glass-raised: rgb(255 253 249 / 0.82);
-  --glass-dark:   rgb(28 27 25 / 0.82);     /* --ink translucide */
   --glass-blur:   saturate(180%) blur(20px);
-  --hairline:     rgb(28 27 25 / 0.12);     /* filet 0,5 px des barres en verre */
-  --fill:         rgb(28 27 25 / 0.06);     /* fond des boutons secondaires (« gris » iOS) */
-  --fill-pressed: rgb(28 27 25 / 0.12);
-  --shadow-float: 0 8px 24px rgb(28 27 25 / 0.16), 0 1px 3px rgb(28 27 25 / 0.08);
 
   /* Mise en page */
   --content-max: 480px;
-  --tabbar-h: 64px;
+  --tabbar-h: 58px;     /* hauteur d'un onglet dans la capsule */
+  --tabbar-gap: 10px;   /* écart entre la capsule et le bas de l'écran */
+  /* Hauteur totale occupée en bas par la capsule (onglets + marges) : à réserver sous le contenu */
+  --tabbar-space: calc(var(--tabbar-h) + 8px + var(--tabbar-gap) + env(safe-area-inset-bottom));
   --navbar-h: 60px;
 
   /* Mouvement */
@@ -46,11 +77,61 @@
   --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1); /* léger rebond, pour les transitions CSS */
 }
 
+/*
+ * Mode sombre automatique : même carnet, la nuit. Papier presque noir, encre crème,
+ * même brique pour les fonds (texte blanc 4,7:1) ; versions plus claires pour le texte.
+ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper:        #121110;
+    --paper-raised: #1E1D1B;
+    --ink:          #F3EFE8;
+    --ink-soft:     #A6A097;  /* 7:1 sur --paper */
+    --rule:         #33302C;
+    --accent-pressed: #A93D1B;
+    --accent-text:  #F0875F;  /* 7:1 sur --paper */
+    --ok:           #5BBF83;
+    --danger:       #FF7A6E;
+    --danger-fill:  #C7352B;  /* texte blanc 5,7:1 */
+    --danger-pressed: #A82B22;
+
+    --hairline:     rgb(255 255 255 / 0.14);
+    --fill:         rgb(255 255 255 / 0.08);
+    --fill-pressed: rgb(255 255 255 / 0.15);
+    --shadow-card:  0 1px 3px rgb(0 0 0 / 0.4);
+    --shadow-float: 0 8px 24px rgb(0 0 0 / 0.5), 0 1px 3px rgb(0 0 0 / 0.4);
+    --backdrop:     rgb(0 0 0 / 0.5);
+    --grid-line:    rgb(255 255 255 / 0.05);
+    --done-tint:    rgb(201 74 34 / 0.14);
+
+    --glass-top:      rgb(58 55 51 / 0.6);
+    --glass-bottom:   rgb(34 33 31 / 0.5);
+    --glass-spec:     rgb(255 255 255 / 0.28);
+    --glass-refract:  rgb(255 255 255 / 0.1);
+    --glass-edge:     rgb(255 255 255 / 0.14);
+    --glass-outline:  rgb(0 0 0 / 0.5);
+    --glass-drop:     rgb(0 0 0 / 0.55);
+    --glass-glow:     rgb(255 255 255 / 0.12);
+    --glass-dark-top:    rgb(70 66 61 / 0.8);
+    --glass-dark-bottom: rgb(48 46 43 / 0.72);
+    --sheet-top:      rgb(38 36 34 / 0.92);
+    --sheet-bottom:   rgb(30 29 27 / 0.88);
+    --tab-pill:       rgb(255 255 255 / 0.12);
+
+    --muscle-body:      #4A4640;
+    --muscle-secondary: #8C4A33;
+    --muscle-primary:   #E0643A;
+  }
+}
+
 /* Navigateurs sans flou : surfaces opaques, jamais de texte illisible */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   :root {
-    --glass: #F5F1EA;
-    --glass-raised: #FFFDF9;
-    --glass-dark: #1C1B19;
+    --glass-top: var(--paper-raised);
+    --glass-bottom: var(--paper-raised);
+    --glass-dark-top: var(--ink);
+    --glass-dark-bottom: var(--ink);
+    --sheet-top: var(--paper-raised);
+    --sheet-bottom: var(--paper-raised);
   }
 }

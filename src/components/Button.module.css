@@ -6,7 +6,7 @@
   gap: var(--s2);
   padding: 0 var(--s5);
   border: 0;
-  border-radius: 12px;
+  border-radius: 999px;
   font-weight: 700;
   font-size: var(--fs-md);
   text-decoration: none;
@@ -33,11 +33,11 @@
 .primary {
   background: var(--accent);
   color: var(--accent-ink);
-  box-shadow: 0 1px 2px rgb(201 74 34 / 0.3);
+  box-shadow: var(--shadow-card);
 }
 
 .primary:active:not(:disabled) {
-  background: #B4401C;
+  background: var(--accent-pressed);
 }
 
 /* Gris translucide, comme les boutons secondaires d'iOS */

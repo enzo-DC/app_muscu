@@ -169,8 +169,11 @@ export const t = {
     restMore: 'Plus de repos',
     stepLabel: 'Pas des boutons − / + pour la charge',
     stepHint: 'Regarde les plus petits disques de ta salle (souvent 1,25 ou 2,5 kg).',
-    vibrateLabel: 'Vibrer à la fin du repos',
-    vibrateHint: 'Ne marche pas sur iPhone : le navigateur ne le permet pas.',
+    vibrateLabel: 'Vibrer',
+    vibrateHint:
+      'Android : vibre quand tu valides une série et à la fin du repos. iPhone : la petite vibration à la validation suit le réglage « Retour haptique » de ton téléphone ; à la fin du repos, c’est le son qui te prévient.',
+    soundLabel: 'Son à la fin du repos',
+    soundHint: 'Deux petits bips quand le repos est fini. Le téléphone doit être déverrouillé, app ouverte.',
     backupTitle: 'Sauvegarde',
     backupHint:
       'Tes données restent sur ce téléphone. Exporte-les de temps en temps : si tu changes de téléphone ou de navigateur, tu les retrouves en important le fichier.',

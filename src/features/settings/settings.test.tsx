@@ -83,13 +83,15 @@ describe('réglages', () => {
     expect(await screen.findByText('1:45')).toBeInTheDocument();
 
     await user.click(screen.getByRole('radio', { name: /1,25/ }));
-    await user.click(screen.getByRole('checkbox', { name: 'Vibrer à la fin du repos' }));
+    await user.click(screen.getByRole('checkbox', { name: 'Vibrer' }));
+    await user.click(screen.getByRole('checkbox', { name: 'Son à la fin du repos' }));
 
     await expect.poll(() => db.settings.get('singleton')).toEqual({
       id: 'singleton',
       defaultRestSeconds: 105,
       weightStep: 1.25,
       vibrate: false,
+      sound: false,
     });
   });
 });

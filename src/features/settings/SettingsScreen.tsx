@@ -51,6 +51,7 @@ export function SettingsScreen() {
           <section className={styles.section}>
             <label className={styles.toggle}>
               <input
+                ref={(el) => el?.setAttribute('switch', '')}
                 type="checkbox"
                 className={styles.toggleInput}
                 checked={settings.vibrate}
@@ -60,6 +61,21 @@ export function SettingsScreen() {
               <span className={fieldStyles.label}>{t.settings.vibrateLabel}</span>
             </label>
             <p className={fieldStyles.hint}>{t.settings.vibrateHint}</p>
+          </section>
+
+          <section className={styles.section}>
+            <label className={styles.toggle}>
+              <input
+                ref={(el) => el?.setAttribute('switch', '')}
+                type="checkbox"
+                className={styles.toggleInput}
+                checked={settings.sound !== false}
+                onChange={(e) => void updateSettings({ sound: e.target.checked })}
+              />
+              <span className={styles.toggleTrack} aria-hidden="true" />
+              <span className={fieldStyles.label}>{t.settings.soundLabel}</span>
+            </label>
+            <p className={fieldStyles.hint}>{t.settings.soundHint}</p>
           </section>
 
           <BackupSection />
