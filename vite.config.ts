@@ -9,10 +9,10 @@ export default defineConfig({
     VitePWA({
       // Une nouvelle version s'installe toute seule ; les données restent dans IndexedDB.
       registerType: 'autoUpdate',
-      includeAssets: ['icon.svg', 'apple-touch-icon.png', 'favicon-32.png'],
+      includeAssets: ['icon.svg', 'favicon.svg', 'apple-touch-icon.png', 'favicon-32.png'],
       manifest: {
-        name: 'Carnet de salle',
-        short_name: 'Carnet',
+        name: 'Fonte',
+        short_name: 'Fonte',
         description: 'Ton carnet d’entraînement : séances, charges, répétitions.',
         lang: 'fr',
         start_url: '/',

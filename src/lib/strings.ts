@@ -2,7 +2,7 @@ import type { Equipment, ExerciseKind, Level, MuscleGroup } from '../db/schema';
 
 /** Tous les textes de l'interface. Français, tutoiement, phrases courtes. */
 export const t = {
-  appName: 'Carnet de salle',
+  appName: 'Fonte',
 
   tabs: {
     sessions: 'Séances',

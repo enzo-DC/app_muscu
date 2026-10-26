@@ -55,7 +55,7 @@ describe('sauvegarde', () => {
 
   it('refuse les fichiers invalides avec un message clair', () => {
     expect(() => parseBackup('pas du json')).toThrow(BackupError);
-    expect(() => parseBackup('{"app":"autre"}')).toThrow(/ne vient pas de Carnet de salle/);
+    expect(() => parseBackup('{"app":"autre"}')).toThrow(/ne vient pas de Fonte/);
     expect(() => parseBackup('{"app":"carnet-de-salle","format":99}')).toThrow(/version plus récente/);
     expect(() =>
       parseBackup('{"app":"carnet-de-salle","format":1,"exercises":[],"templates":[],"sessions":"x","settings":[]}'),
@@ -72,6 +72,6 @@ describe('sauvegarde', () => {
   });
 
   it('nomme le fichier avec la date du jour', () => {
-    expect(backupFileName(new Date(2026, 9, 26, 22).getTime())).toBe('carnet-de-salle-2026-10-26.json');
+    expect(backupFileName(new Date(2026, 9, 26, 22).getTime())).toBe('fonte-2026-10-26.json');
   });
 });

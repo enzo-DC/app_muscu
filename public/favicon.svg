@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Version simplifiée pour les petites tailles (onglet du navigateur) : traits épais, sans quadrillage -->
+  <rect width="64" height="64" rx="14" fill="#F5F1EA"/>
+  <g stroke="#1C1B19" stroke-width="6" stroke-linecap="round">
+    <path d="M18 16V48M27 16V48M36 16V48M45 16V48"/>
+  </g>
+  <path d="M12 43L52 21" stroke="#C94A22" stroke-width="6" stroke-linecap="round"/>
+</svg>

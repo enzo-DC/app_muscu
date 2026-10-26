@@ -1,4 +1,4 @@
-# CLAUDE.md — Carnet de salle
+# CLAUDE.md — Fonte (carnet de salle)
 
 Ce fichier explique à Claude Code le projet, les choix techniques, les règles de design et la façon de travailler. Lis-le en entier avant d'écrire du code.
 

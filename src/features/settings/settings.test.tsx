@@ -44,7 +44,7 @@ describe('sauvegarde depuis les réglages', () => {
     renderSettings();
     const file = new File(['{"app":"autre"}'], 'x.json', { type: 'application/json' });
     await user.upload(await screen.findByLabelText('Importer une sauvegarde', { selector: 'input' }), file);
-    expect(await screen.findByText(/Import impossible\. Ce fichier ne vient pas de Carnet de salle/)).toBeInTheDocument();
+    expect(await screen.findByText(/Import impossible\. Ce fichier ne vient pas de Fonte/)).toBeInTheDocument();
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 

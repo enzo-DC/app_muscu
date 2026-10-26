@@ -1,6 +1,8 @@
 import { db, type Exercise, type Session, type Settings, type WorkoutTemplate } from './schema';
 
+// Identifiant interne des sauvegardes : ne pas changer (les fichiers déjà exportés doivent rester lisibles)
 const APP_ID = 'carnet-de-salle';
+const FILE_PREFIX = 'fonte';
 /** Format du fichier de sauvegarde (indépendant de la version du schéma Dexie). */
 export const BACKUP_FORMAT = 1;
 
@@ -28,11 +30,11 @@ export async function exportBackup(now = Date.now()): Promise<Backup> {
   }));
 }
 
-/** « carnet-de-salle-2026-10-26.json » */
+/** « fonte-2026-10-26.json » */
 export function backupFileName(now = Date.now()): string {
   const d = new Date(now);
   const pad = (n: number) => String(n).padStart(2, '0');
-  return `${APP_ID}-${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}.json`;
+  return `${FILE_PREFIX}-${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}.json`;
 }
 
 export class BackupError extends Error {}
@@ -49,7 +51,7 @@ export function parseBackup(text: string): Backup {
     throw new BackupError('Ce fichier n’est pas une sauvegarde lisible.');
   }
   if (!isObject(data) || data.app !== APP_ID) {
-    throw new BackupError('Ce fichier ne vient pas de Carnet de salle.');
+    throw new BackupError('Ce fichier ne vient pas de Fonte.');
   }
   if (typeof data.format !== 'number' || data.format > BACKUP_FORMAT) {
     throw new BackupError('Cette sauvegarde vient d’une version plus récente de l’app. Mets l’app à jour.');

@@ -114,6 +114,7 @@ export type CarnetDB = Dexie & {
   settings: EntityTable<Settings, 'id'>;
 };
 
+// Nom interne de la base (l'app s'appelait « Carnet de salle ») : ne pas changer, sinon les données sont perdues
 export const db = new Dexie('carnet-de-salle') as CarnetDB;
 
 // Pour faire évoluer le schéma : ajouter db.version(n + 1).stores({...}).upgrade(tx => ...)
